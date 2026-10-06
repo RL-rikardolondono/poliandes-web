@@ -1,0 +1,359 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Profesionales de la salud · POLIANDES</title>
+<meta name="description" content="Cursos obligatorios de actualización para profesionales de la salud: reanimación, materno-infantil y cursos exigidos por la Resolución 3100 de 2019. POLIANDES, Santa Marta.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --petroleo:#253B80; --petroleo-2:#031358; --ambar:#FF6000; --celeste:#179BD7; --verde:#1F8A4C;
+  --fondo:#F7FCFE; --sup:#FFFFFF; --texto:#222222; --suave:#5F6B7A; --borde:#D9E4EE;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--fondo);color:var(--texto);font:16px/1.6 "Roboto",system-ui,sans-serif}
+h1,h2,h3{font-family:"Roboto",sans-serif;line-height:1.1;margin:0 0 .4em;letter-spacing:.2px}
+a{color:var(--petroleo)}
+.wrap{max-width:1120px;margin:0 auto;padding:0 16px}
+
+/* Barra superior */
+.top{background:var(--petroleo);color:#fff;position:sticky;top:0;z-index:20}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:60px}
+.marca{font-family:"Roboto",sans-serif;font-weight:700;font-size:1.35rem;color:#fff;text-decoration:none;letter-spacing:1px;display:flex;align-items:center;gap:10px}
+.marca img{width:44px;height:44px}
+.marca span{color:var(--celeste)}
+.nav{display:flex;gap:18px;flex-wrap:wrap}
+.nav a{color:#fff;text-decoration:none;font-size:.92rem;opacity:.9}
+.nav a:hover{opacity:1;color:var(--celeste)}
+@media(max-width:720px){.nav{display:none}}
+
+/* Hero */
+.hero{background:linear-gradient(135deg,var(--petroleo-2) 0%,var(--petroleo) 55%,var(--celeste) 130%);color:#fff;padding:56px 0 64px}
+.etiqueta{display:inline-block;background:var(--ambar);color:#fff;font-weight:700;font-size:.8rem;text-transform:uppercase;letter-spacing:1px;padding:4px 10px;border-radius:4px;margin-bottom:14px}
+.hero h1{font-size:clamp(2.2rem,5vw,3.4rem)}
+.hero p{max-width:680px;font-size:1.1rem;opacity:.92;margin:0 0 24px}
+.btns{display:flex;gap:12px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:8px;border:0;border-radius:8px;padding:12px 20px;font:700 1rem "Roboto",system-ui,sans-serif;cursor:pointer;text-decoration:none}
+.btn-wa{background:var(--verde);color:#fff}
+.btn-wa:hover{filter:brightness(1.08)}
+.btn-ambar{background:var(--ambar);color:#fff}
+.btn-ambar:hover{filter:brightness(1.08)}
+.btn-borde{background:transparent;color:#fff;border:2px solid rgba(255,255,255,.6)}
+.btn-pri{background:var(--petroleo);color:#fff}
+
+/* Banner revista */
+.revista{display:none;background:#FFF1E8;border-left:6px solid var(--ambar);padding:18px 0}
+.revista.on{display:block}
+.revista .wrap{display:flex;gap:16px;align-items:center;flex-wrap:wrap;justify-content:space-between}
+.revista strong{font-family:"Roboto",sans-serif;font-size:1.3rem}
+
+/* Gold */
+.gold{margin-top:-32px}
+.gold-card{background:var(--sup);border-radius:14px;box-shadow:0 8px 28px rgba(21,35,43,.12);padding:28px;display:grid;grid-template-columns:auto 1fr;gap:24px;align-items:center;border-top:6px solid var(--ambar)}
+.cien{font-family:"Roboto",sans-serif;font-weight:700;font-size:4.2rem;color:var(--ambar);line-height:1}
+.cien small{display:block;font-size:1rem;color:var(--petroleo);letter-spacing:1px;text-transform:uppercase}
+.gold-card h2{font-size:1.8rem;color:var(--petroleo)}
+.gold-card ul{margin:.4em 0 0;padding-left:1.1em}
+@media(max-width:620px){.gold-card{grid-template-columns:1fr;text-align:left}}
+
+/* Secciones */
+section{padding:48px 0}
+.titulo-sec{font-size:2.1rem;color:var(--petroleo)}
+.sub{color:var(--suave);max-width:760px;margin:0 0 24px}
+.grupo{margin-top:36px}
+.grupo-h{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+.grupo-h .num{background:var(--petroleo);color:#fff;font-family:"Roboto",sans-serif;font-weight:700;width:36px;height:36px;border-radius:50%;display:grid;place-items:center;flex:none}
+.grupo-h h3{font-size:1.6rem;margin:0}
+.grupo-h .nota{font-size:.85rem;color:var(--suave)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px}
+.curso{background:var(--sup);border:1px solid var(--borde);border-radius:12px;padding:18px;display:flex;flex-direction:column;gap:8px;transition:box-shadow .2s,transform .2s}
+.curso:hover{box-shadow:0 6px 18px rgba(21,35,43,.1);transform:translateY(-2px)}
+.curso .sigla{font-family:"Roboto",sans-serif;font-weight:700;color:var(--celeste);font-size:1rem;letter-spacing:1px;text-transform:uppercase}
+.curso h4{margin:0;font-size:1.05rem}
+.curso p{margin:0;color:var(--suave);font-size:.92rem;flex:1}
+.precio{display:flex;justify-content:space-between;align-items:baseline;gap:8px;border-top:1px dashed var(--borde);padding-top:8px}
+.precio b{font-size:1.25rem;color:var(--petroleo)}
+.precio span{font-size:.82rem;color:var(--ambar);font-weight:700;text-align:right}
+.modal{display:inline-block;background:var(--celeste);color:#fff;font-size:.75rem;font-weight:700;padding:2px 8px;border-radius:4px;letter-spacing:.5px;align-self:flex-start}
+.total{font-weight:700;color:var(--petroleo);margin:.4em 0 0}
+.curso .btn{padding:9px 14px;font-size:.9rem;justify-content:center}
+.curso label{font-size:.85rem;display:flex;gap:6px;align-items:center;color:var(--petroleo);cursor:pointer}
+
+/* Pasos */
+.pasos{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;counter-reset:p}
+.paso{background:var(--sup);border-radius:12px;padding:20px;border:1px solid var(--borde)}
+.paso::before{counter-increment:p;content:counter(p);font-family:"Roboto",sans-serif;font-weight:700;font-size:2rem;color:var(--ambar)}
+.paso h4{margin:.2em 0;font-size:1.05rem}
+.paso p{margin:0;color:var(--suave);font-size:.93rem}
+
+/* Formulario */
+.form{background:var(--sup);border-radius:14px;padding:26px;border:1px solid var(--borde);display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.form .full{grid-column:1/-1}
+.form label{display:block;font-weight:600;font-size:.9rem;margin-bottom:4px}
+.form input,.form select,.form textarea{width:100%;padding:10px 12px;border:1px solid var(--borde);border-radius:8px;font:inherit;background:#fff;color:var(--texto)}
+.form input:focus,.form select:focus,.form textarea:focus{outline:2px solid var(--celeste);border-color:var(--celeste)}
+.sel-lista{display:flex;flex-wrap:wrap;gap:8px}
+.chip{border:1px solid var(--borde);background:var(--fondo);border-radius:20px;padding:6px 12px;font-size:.85rem;cursor:pointer;user-select:none}
+.chip.on{background:var(--petroleo);color:#fff;border-color:var(--petroleo)}
+.radios{display:flex;gap:18px;flex-wrap:wrap}
+.radios label{font-weight:400;display:flex;gap:6px;align-items:center}
+.radios input{width:auto}
+.aviso{font-size:.85rem;color:var(--suave)}
+.error{color:#B3261E;font-size:.88rem;display:none}
+@media(max-width:620px){.form{grid-template-columns:1fr}}
+
+/* Pago */
+.pago{background:var(--petroleo);color:#fff;border-radius:14px;padding:26px;display:grid;grid-template-columns:1fr auto;gap:20px;align-items:center}
+.pago h3{font-size:1.6rem}
+.llave{background:#fff;color:var(--texto);border-radius:10px;padding:14px 18px;text-align:center}
+.llave b{display:block;font-family:"Roboto",sans-serif;font-size:1.9rem;color:var(--petroleo);letter-spacing:1px}
+@media(max-width:620px){.pago{grid-template-columns:1fr}}
+
+/* Barra flotante de selección */
+.flota{position:fixed;left:50%;bottom:16px;transform:translateX(-50%) translateY(120px);background:var(--petroleo);color:#fff;border-radius:40px;padding:8px 8px 8px 18px;display:flex;gap:12px;align-items:center;box-shadow:0 8px 24px rgba(0,0,0,.25);transition:transform .3s;z-index:30;max-width:calc(100% - 32px)}
+.flota.on{transform:translateX(-50%) translateY(0)}
+.flota .btn{padding:9px 16px;border-radius:30px}
+
+footer{background:var(--texto);color:#C9D3D6;padding:36px 0 24px;font-size:.92rem}
+footer .cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px}
+footer h4{color:#fff;font-family:"Roboto",sans-serif;font-size:1.2rem;margin:0 0 8px}
+footer a{color:#fff}
+.credito{margin-top:24px;padding-top:16px;border-top:1px solid rgba(255,255,255,.12);display:flex;align-items:center;gap:8px;font-size:.8rem;flex-wrap:wrap}
+.credito svg{width:20px;height:20px}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <a class="marca" href="/"><img src="https://poliandes.com/wp-content/uploads/2024/09/cropped-Logo-Poliandes2peq.png" alt="Escudo POLIANDES"><b style="font-weight:700">POLI<span>ANDES</span></b></a>
+    <nav class="nav">
+      <a href="#cursos">Cursos</a>
+      <a href="#gold">Membresía Gold</a>
+      <a href="#inscripcion">Inscripción</a>
+      <a href="#pago">Pago</a>
+    </nav>
+  </div>
+</header>
+
+<!-- Aparece solo cuando el médico llega desde la revista (?ref=revista) -->
+<div class="revista" id="bannerRevista">
+  <div class="wrap">
+    <div><strong>Bienvenido, colega de la Revista Colombiana de Medicina.</strong><br>
+    Si es miembro Gold, tiene 90 % de descuento y prioridad en los cupos.</div>
+    <a class="btn btn-ambar" href="#inscripcion">Ir a la inscripción</a>
+  </div>
+</div>
+
+<div class="hero">
+  <div class="wrap">
+    <span class="etiqueta">Profesionales de la salud · 100 % virtual</span>
+    <h1>Cursos obligatorios de actualización para el personal de salud</h1>
+    <p>Reanimación, atención materno-infantil y los cursos que exige la Resolución 3100 de 2019 para habilitar servicios. Cursos 100 % virtuales en el campus virtual de POLIANDES, a su ritmo y desde cualquier lugar. Certificados de POLIANDES, aceptados por clínicas públicas y privadas.</p>
+    <div class="btns">
+      <a class="btn btn-ambar" href="#cursos">Ver cursos</a>
+      <a class="btn btn-wa" id="waHero" href="#" target="_blank" rel="noopener">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .1-3.3-.8-2.8-1.1-4.6-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.9s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.3 0 .5l-.4.5-.3.4c-.1.1-.3.3-.1.6.1.3.6 1.1 1.4 1.8 1 .9 1.8 1.1 2.1 1.3.3.1.4.1.6-.1l.8-1c.2-.3.4-.2.6-.1l1.9.9c.3.1.4.2.5.3.1.2.1.7-.1 1.3z"/></svg>
+        Escribir por WhatsApp
+      </a>
+    </div>
+  </div>
+</div>
+
+<div class="wrap gold" id="gold">
+  <div class="gold-card">
+    <div class="cien">90 %<small>de descuento</small></div>
+    <div>
+      <h2>Beneficio para miembros de la Membresía Gold</h2>
+      <p style="margin:0">Convenio entre la <b>Revista Colombiana de Medicina</b> y POLIANDES.</p>
+      <ul>
+        <li>90 % de descuento en todos los cursos de esta página (ejemplo: SVB/BLS de $120.000 a $12.000).</li>
+        <li>Acceso preferencial a los cupos de cada cohorte.</li>
+        <li>Al inscribirse, indique que es miembro Gold; se verifica con la revista.</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<section id="cursos">
+  <div class="wrap">
+    <h2 class="titulo-sec">Cursos disponibles</h2>
+    <p class="sub">Marque los cursos que le interesan y envíe una sola solicitud, o pregunte por cada uno directamente por WhatsApp.</p>
+    <div id="grupos"></div>
+  </div>
+</section>
+
+<section style="background:var(--sup)">
+  <div class="wrap">
+    <h2 class="titulo-sec">Cómo inscribirse</h2>
+    <div class="pasos">
+      <div class="paso"><h4>Elija sus cursos</h4><p>Márquelos en la lista o en el formulario de inscripción.</p></div>
+      <div class="paso"><h4>Envíe la solicitud</h4><p>Se abre WhatsApp con sus datos listos. Solo pulse “Enviar”.</p></div>
+      <div class="paso"><h4>Confirme su cupo</h4><p>POLIANDES le responde con fechas, valor y, si es miembro Gold, su descuento.</p></div>
+      <div class="paso"><h4>Pague y comience</h4><p>Pague por la llave de POLIANDES, envíe el comprobante y reciba su acceso al campus virtual.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="inscripcion">
+  <div class="wrap">
+    <h2 class="titulo-sec">Solicitud de inscripción</h2>
+    <p class="sub">Complete sus datos. Al pulsar el botón se abre WhatsApp con el mensaje listo para enviar a POLIANDES.</p>
+    <form class="form" id="form" novalidate>
+      <div><label for="nombre">Nombre completo *</label><input id="nombre" required autocomplete="name"></div>
+      <div><label for="doc">Cédula *</label><input id="doc" inputmode="numeric" required></div>
+      <div><label for="prof">Profesión *</label>
+        <select id="prof" required>
+          <option value="">Seleccione…</option>
+          <option>Médico(a) general</option><option>Médico(a) especialista</option>
+          <option>Enfermero(a) profesional</option><option>Auxiliar de enfermería</option>
+          <option>Terapeuta</option><option>Odontólogo(a)</option><option>Bacteriólogo(a)</option>
+          <option>Psicólogo(a)</option><option>Estudiante del área de la salud</option><option>Otra</option>
+        </select></div>
+      <div><label for="ciudad">Ciudad *</label><input id="ciudad" required></div>
+      <div class="full"><label for="inst">Institución donde trabaja (opcional)</label><input id="inst"></div>
+      <div class="full"><label>Cursos de interés *</label><div class="sel-lista" id="chips"></div><p class="total" id="total"></p></div>
+      <div class="full"><label>¿Es miembro Gold de la Revista Colombiana de Medicina?</label>
+        <div class="radios">
+          <label><input type="radio" name="gold" value="Sí"> Sí</label>
+          <label><input type="radio" name="gold" value="No" checked> No</label>
+          <label><input type="radio" name="gold" value="Quiero afiliarme"> Quiero afiliarme</label>
+        </div></div>
+      <div class="full"><label for="obs">Comentarios (opcional)</label><textarea id="obs" rows="2"></textarea></div>
+      <div class="full">
+        <p class="error" id="err">Por favor complete los campos marcados con * y elija al menos un curso.</p>
+        <button class="btn btn-wa" type="submit">Enviar solicitud por WhatsApp</button>
+        <p class="aviso">Sus datos se envían solo por WhatsApp a POLIANDES; esta página no los guarda.</p>
+      </div>
+    </form>
+  </div>
+</section>
+
+<section id="pago" style="padding-top:0">
+  <div class="wrap">
+    <div class="pago">
+      <div>
+        <h3>Pago</h3>
+        <p style="margin:0">Pague por la llave de POLIANDES después de que le confirmen el cupo. Los miembros Gold pagan el valor con el 90 % de descuento una vez verificada su membresía. Envíe la foto del comprobante al WhatsApp 301 344 4422. No se recibe dinero en efectivo.</p>
+      </div>
+      <div class="llave">Llave POLIANDES<b>3013444422</b><small>NIT 900043963-7</small></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="cols">
+      <div><h4>POLIANDES</h4>Institución de educación para el trabajo y el desarrollo humano.<br>NIT 900043963-7</div>
+      <div><h4>Contacto</h4>Calle 11D No. 22-90, Santa Marta<br>WhatsApp: <a href="https://wa.me/573013444422" target="_blank" rel="noopener">301 344 4422</a></div>
+      <div><h4>Convenio</h4><a href="https://revistacolombianademedicina.com" target="_blank" rel="noopener">Revista Colombiana de Medicina</a><br>Membresía Gold: 90 % de descuento</div>
+    </div>
+    <div class="credito">
+      <svg viewBox="0 0 200 200" aria-hidden="true"><rect x="4" y="4" width="192" height="192" rx="46" fill="#1E3A4C"/><g stroke="#FFFFFF" stroke-linecap="round"><polygon points="100,42 150.2,71 150.2,129 100,158 49.8,129 49.8,71" fill="none" stroke-opacity=".35" stroke-width="4"/><path d="M100 100L100 42M100 100L150.2 71M100 100L150.2 129M100 100L100 158M100 100L49.8 129M100 100L49.8 71" stroke-width="6"/></g><g fill="#FFFFFF"><circle cx="150.2" cy="71" r="10"/><circle cx="150.2" cy="129" r="10"/><circle cx="100" cy="158" r="10"/><circle cx="49.8" cy="129" r="10"/><circle cx="49.8" cy="71" r="10"/></g><circle cx="100" cy="42" r="13" fill="#E0A21A"/><circle cx="100" cy="100" r="20" fill="#E0A21A"/></svg>
+      Sitio desarrollado por SkyNet Genesis · contacto@skynetgenesis.com · WhatsApp 304 437 5758
+    </div>
+  </div>
+</footer>
+
+<div class="flota" id="flota">
+  <span id="flotaTxt">0 cursos</span>
+  <a class="btn btn-ambar" href="#inscripcion">Inscribirme</a>
+</div>
+
+<script>
+const WA = "573013444422";
+const GRUPOS = [
+  {t:"Reanimación", n:"Soporte vital para todos los niveles de atención", c:[
+    {s:"SVB / BLS", p:120000, t:"Soporte vital básico", d:"RCP de alta calidad, uso del DEA y manejo de la vía aérea obstruida en adultos y niños."},
+    {s:"SVA / ACLS", p:180000, t:"Soporte vital cardiovascular avanzado", d:"Manejo del paro cardiorrespiratorio, arritmias, síndrome coronario agudo y ACV."},
+    {s:"PALS", p:180000, t:"Soporte vital avanzado pediátrico", d:"Evaluación y reanimación del lactante y el niño críticamente enfermo."},
+    {s:"Neonatal", p:150000, t:"Reanimación neonatal", d:"Atención del recién nacido en sala de partos y reanimación neonatal."}
+  ]},
+  {t:"Materno-infantil", n:"Atención integral del niño y del recién nacido", c:[
+    {s:"AIEPI", p:150000, t:"Atención Integrada a las Enfermedades Prevalentes de la Infancia", d:"Estrategia para la atención del niño menor de 5 años en los servicios de salud."},
+    {s:"UCI neonatal", p:180000, t:"Atención del paciente neonatal", d:"Cuidado del recién nacido en unidades de cuidado intensivo e intermedio neonatal."}
+  ]},
+  {t:"Exigidos por la Resolución 3100 de 2019", n:"Requeridos para la habilitación de servicios de salud", c:[
+    {s:"Violencia sexual", p:90000, t:"Atención integral a víctimas de violencia sexual", d:"Protocolo de atención en salud a víctimas de violencia sexual."},
+    {s:"Triage", p:90000, t:"Triage (Resolución 5596 de 2015)", d:"Clasificación de pacientes en el servicio de urgencias."},
+    {s:"Seguridad", p:80000, t:"Seguridad del paciente", d:"Prevención de eventos adversos y buenas prácticas de atención segura."},
+    {s:"POCT", p:80000, t:"Pruebas en el punto de atención", d:"Realización, control y registro de pruebas rápidas en el punto de atención."},
+    {s:"Salud mental", p:90000, t:"Atención en salud mental", d:"Abordaje inicial del paciente con problemas o trastornos de salud mental."},
+    {s:"Duelo", p:70000, t:"Gestión del duelo", d:"Acompañamiento al paciente y a la familia en procesos de pérdida."},
+    {s:"Donación", p:80000, t:"Cuidado del donante", d:"Identificación y manejo del potencial donante de órganos y tejidos."}
+  ]}
+];
+
+const cop = n => "$" + Math.round(n).toLocaleString("es-CO");
+const PRECIO = {}; GRUPOS.forEach(g => g.c.forEach(c => PRECIO[c.t] = c.p));
+const elegidos = new Set();
+const desdeRevista = /ref=revista/i.test(location.search) || /revistacolombianademedicina/i.test(document.referrer);
+const origen = desdeRevista ? "vengo de la Revista Colombiana de Medicina." : "vengo de la página de POLIANDES.";
+const wa = txt => "https://wa.me/" + WA + "?text=" + encodeURIComponent(txt);
+
+if (desdeRevista) document.getElementById("bannerRevista").classList.add("on");
+document.getElementById("waHero").href = wa("Hola, " + origen + " Quiero información sobre los cursos de actualización para profesionales de la salud.");
+
+// Pintar cursos y chips
+const cont = document.getElementById("grupos"), chips = document.getElementById("chips");
+GRUPOS.forEach((g, i) => {
+  const div = document.createElement("div"); div.className = "grupo";
+  div.innerHTML = `<div class="grupo-h"><div class="num">${i+1}</div><div><h3>${g.t}</h3><div class="nota">${g.n}</div></div></div><div class="grid"></div>`;
+  const grid = div.querySelector(".grid");
+  g.c.forEach(c => {
+    const nombre = c.t;
+    const card = document.createElement("div"); card.className = "curso";
+    card.innerHTML = `<span class="modal">VIRTUAL</span><div class="sigla">${c.s}</div><h4>${c.t}</h4><p>${c.d}</p>
+      <div class="precio"><b>${cop(c.p)}</b><span>Gold: ${cop(c.p*0.1)}</span></div>
+      <label><input type="checkbox" data-c="${nombre}"> Agregar a mi solicitud</label>
+      <a class="btn btn-wa" target="_blank" rel="noopener" href="${wa("Hola, " + origen + " Quiero información sobre el curso: " + nombre + ".")}">Preguntar por WhatsApp</a>`;
+    grid.appendChild(card);
+    const ch = document.createElement("span"); ch.className = "chip"; ch.textContent = c.s; ch.dataset.c = nombre;
+    chips.appendChild(ch);
+  });
+  cont.appendChild(div);
+});
+
+function sync(){
+  document.querySelectorAll("[data-c]").forEach(el => {
+    const on = elegidos.has(el.dataset.c);
+    if (el.type === "checkbox") el.checked = on; else el.classList.toggle("on", on);
+  });
+  const n = elegidos.size;
+  document.getElementById("flotaTxt").textContent = n + (n === 1 ? " curso elegido" : " cursos elegidos");
+  document.getElementById("flota").classList.toggle("on", n > 0);
+  const tot=[...elegidos].reduce((a,c)=>a+PRECIO[c],0);
+  document.getElementById("total").textContent = n ? "Total: " + cop(tot) + "  ·  Miembro Gold: " + cop(tot*0.1) : "";
+}
+document.addEventListener("change", e => {
+  if (e.target.matches("input[type=checkbox][data-c]")) { e.target.checked ? elegidos.add(e.target.dataset.c) : elegidos.delete(e.target.dataset.c); sync(); }
+});
+chips.addEventListener("click", e => {
+  const c = e.target.closest(".chip"); if (!c) return;
+  elegidos.has(c.dataset.c) ? elegidos.delete(c.dataset.c) : elegidos.add(c.dataset.c); sync();
+});
+
+// Formulario → WhatsApp
+document.getElementById("form").addEventListener("submit", e => {
+  e.preventDefault();
+  const v = id => document.getElementById(id).value.trim();
+  const ok = v("nombre") && v("doc") && v("prof") && v("ciudad") && elegidos.size;
+  document.getElementById("err").style.display = ok ? "none" : "block";
+  if (!ok) return;
+  const gold = document.querySelector("input[name=gold]:checked").value;
+  let m = "Hola, " + origen + "\nQuiero inscribirme en los cursos de actualización.\n\n"
+    + "Nombre: " + v("nombre") + "\nCédula: " + v("doc") + "\nProfesión: " + v("prof") + "\nCiudad: " + v("ciudad")
+    + (v("inst") ? "\nInstitución: " + v("inst") : "")
+    + "\nMiembro Gold de la revista: " + gold
+    + "\n\nCursos:\n- " + [...elegidos].map(c => c + " (" + cop(PRECIO[c]) + ")").join("\n- ")
+    + "\nTotal: " + cop([...elegidos].reduce((a,c)=>a+PRECIO[c],0)) + (gold==="Sí" ? " (con 90 % Gold: " + cop([...elegidos].reduce((a,c)=>a+PRECIO[c],0)*0.1) + ")" : "")
+    + (v("obs") ? "\n\nComentarios: " + v("obs") : "");
+  window.open(wa(m), "_blank", "noopener");
+});
+</script>
+</body>
+</html>
