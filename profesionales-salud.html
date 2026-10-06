@@ -124,21 +124,47 @@ footer h4{color:#fff;font-family:"Roboto",sans-serif;font-size:1.2rem;margin:0 0
 footer a{color:#fff}
 .credito{margin-top:24px;padding-top:16px;border-top:1px solid rgba(255,255,255,.12);display:flex;align-items:center;gap:8px;font-size:.8rem;flex-wrap:wrap}
 .credito svg{width:20px;height:20px}
+
+/* Menú general del sitio */
+.aviso-top,header.top{--azul:#253B80;--azul-osc:#031358;--celeste:#179BD7;--naranja:#FF6000;--fondo:#F7FCFE;--texto:#222}
+.aviso-top{background:var(--naranja);color:#fff;font-size:.9rem;text-align:center;padding:6px 16px}
+.aviso-top a{color:#fff;font-weight:700}
+header.top{background:var(--azul);position:sticky;top:0;z-index:50;box-shadow:0 2px 10px rgba(0,0,0,.15)}
+header.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:64px}
+.marca{display:flex;align-items:center;gap:10px;color:#fff;text-decoration:none;font-weight:900;font-size:1.3rem;letter-spacing:1px}
+.marca img{width:46px;height:46px}.marca span{color:var(--celeste)}
+.marca small{display:block;white-space:nowrap;font-weight:400;font-size:.68rem;letter-spacing:.3px;opacity:.85}
+nav.menu{display:flex;gap:2px;align-items:center;flex-wrap:nowrap;white-space:nowrap}
+nav.menu>a,nav.menu .dd>button{color:#fff;text-decoration:none;font:500 .92rem "Roboto",sans-serif;padding:10px 9px;border-radius:6px;background:none;border:0;cursor:pointer}
+nav.menu>a:hover,nav.menu .dd>button:hover,nav.menu a.activo{background:rgba(255,255,255,.12)}
+nav.menu a.cta{background:var(--naranja);margin-left:6px}
+.dd{position:relative}
+.dd .sub{display:none;position:absolute;top:100%;left:0;background:#fff;min-width:250px;border-radius:8px;box-shadow:0 10px 30px rgba(0,0,0,.18);padding:8px;z-index:60}
+.dd:hover .sub,.dd:focus-within .sub{display:block}
+.dd .sub a{display:block;color:var(--texto);text-decoration:none;padding:8px 10px;border-radius:6px;font-size:.92rem}
+.dd .sub a:hover{background:var(--fondo);color:var(--azul)}
+header.top .hamb{display:none;background:none;border:0;color:#fff;font-size:1.7rem;cursor:pointer}
+@media(max-width:1180px){header.top .hamb{display:block}nav.menu{display:none;position:absolute;top:64px;left:0;right:0;background:var(--azul);flex-direction:column;align-items:stretch;padding:8px 16px 16px}
+nav.menu.abierto{display:flex}.dd .sub{position:static;box-shadow:none;background:rgba(255,255,255,.08);display:block}.dd .sub a{color:#fff}nav.menu a.cta{margin:6px 0 0}}
+header.top .wrap{max-width:1140px}
 </style>
 </head>
 <body>
 
-<header class="top">
-  <div class="wrap">
-    <a class="marca" href="/"><img src="https://poliandes.com/wp-content/uploads/2024/09/cropped-Logo-Poliandes2peq.png" alt="Escudo POLIANDES"><b style="font-weight:700">POLI<span>ANDES</span></b></a>
-    <nav class="nav">
-      <a href="#cursos">Cursos</a>
-      <a href="#gold">Membresía Gold</a>
-      <a href="#inscripcion">Inscripción</a>
-      <a href="#pago">Pago</a>
-    </nav>
-  </div>
-</header>
+<div class="aviso-top">Línea oficial única de POLIANDES: WhatsApp <a href="https://wa.me/573013444422">301 344 4422</a></div>
+<header class="top"><div class="wrap">
+<a class="marca" href="/"><img src="/img/logo.png" onerror="this.src='https://poliandes.com/wp-content/uploads/2024/09/cropped-Logo-Poliandes2peq.png'" alt="Escudo POLIANDES"><div>POLI<span>ANDES</span><small>Politécnico Industrial de Los Andes</small></div></a>
+<button class="hamb" aria-label="Menú" onclick="document.getElementById('menu').classList.toggle('abierto')">☰</button>
+<nav class="menu" id="menu">
+<div class="dd"><button>Oferta académica ▾</button><div class="sub"><a href="/oferta.html"><b>Ver toda la oferta</b></a><a href="/veterinaria.html">Veterinaria Técnico Laboral</a><a href="/preescolar.html">Preescolar Técnico Laboral</a><a href="/administracion-finanzas.html">Administración y Finanzas Técnico Laboral</a><a href="/maquinaria-pesada.html">Operador Múltiple de Maquinaria Pesada</a><a href="/estudios-biblicos.html">Estudios Bíblicos</a><a href="/diplomado-vih.html">Diplomado en VIH</a><a href="/diplomado-docencia.html">Diplomado en Docencia Universitaria</a><a href="/diplomado-autismo.html">Diplomado en Neurodivergencia: Autismo en el Entorno Escolar</a></div></div>
+<div class="dd"><button>Aspirantes ▾</button><div class="sub"><a href="/aspirantes.html">Cómo inscribirse</a><a href="/aspirantes.html#becas">Becas 500</a><a href="/carpeta-matricula.html">Carpeta de matrícula</a><a href="/calendario.html">Calendario académico</a></div></div>
+<div class="dd"><button>Estudiantes ▾</button><div class="sub"><a href="https://poliandes.com/campusvirtualpoliandes/my/">Campus virtual</a><a href="/estudiantes.html#renovacion">Renovación de matrícula y beca</a><a href="/estudiantes.html#practicas">Prácticas académicas</a><a href="/estudiantes.html#reglamentos">Reglamentos</a><a href="/estudiantes.html#reintegro">Reintegros</a><a href="/calendario.html">Calendario académico</a><a href="/tramites.html">Trámites y derechos pecuniarios</a><a href="/documentos.html">Todos los documentos y formatos</a></div></div>
+<a href="/profesionales-salud.html" class=activo>Cursos de salud</a>
+<div class="dd"><button>Egresados ▾</button><div class="sub"><a href="/egresados.html">Egresados</a><a href="/tramites.html">Solicitud de documentos</a><a href="/empresas.html">Convenios de prácticas</a><a href="/empresas.html#verificacion">Verificación de títulos</a></div></div>
+<div class="dd"><button>Institucional ▾</button><div class="sub"><a href="/noticias.html">HOY en POLIANDES y eventos</a><a href="/documentos.html">Documentos y formatos</a><a href="/institucional.html#resoluciones">Resoluciones rectorales</a><a href="/institucional.html#comunicados">Comunicados</a><a href="/institucional.html#proyectos">Proyectos</a><a href="/institucional.html#bibliotecas">Bibliotecas virtuales</a><a href="/institucional.html#funcionarios">Funcionarios</a></div></div>
+<a class="cta" href="https://poliandes.com/campusvirtualpoliandes/my/">Campus virtual</a>
+</nav>
+</div></header>
 
 <!-- Aparece solo cuando el médico llega desde la revista (?ref=revista) -->
 <div class="revista" id="bannerRevista">
