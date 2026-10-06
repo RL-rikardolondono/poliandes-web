@@ -1,0 +1,30 @@
+name: Recortar bordes negros de fotos
+on:
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  recortar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Recortar
+        run: |
+          pip install pillow
+          python3 - <<'PY'
+          import glob
+          from PIL import Image
+          for f in glob.glob("img/reel-*.jpg"):
+              im = Image.open(f).convert("RGB")
+              box = im.convert("L").point(lambda p: 255 if p > 28 else 0).getbbox()
+              if box and (box[2]-box[0] < im.width-4 or box[3]-box[1] < im.height-4):
+                  im.crop(box).save(f, quality=88)
+                  print("recortada", f, im.size, "->", box)
+          PY
+      - name: Guardar
+        run: |
+          git config user.name "POLIANDES"
+          git config user.email "poliandes@poliandes.com"
+          git add -A img
+          git commit -m "Recortar bordes de fotos" || echo "Sin cambios"
+          git push
