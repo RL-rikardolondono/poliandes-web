@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#253B80"/><stop offset="1" stop-color="#031358"/></linearGradient>
+<pattern id="p" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="2" fill="#fff" fill-opacity=".08"/></pattern></defs>
+<rect width="800" height="800" fill="url(#g)"/><rect width="800" height="800" fill="url(#p)"/>
+<circle cx="690" cy="120" r="210" fill="#fff" fill-opacity=".05"/><circle cx="90" cy="740" r="180" fill="#FF6000" fill-opacity=".14"/>
+<g fill="none" stroke="#fff" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"><path d="M400 230v290"/><path d="M400 230q-110-50-230-10v290q120-40 230 10"/><path d="M400 230q110-50 230-10v290q-120-40-230 10"/>
+<path d="M230 300q60-15 120 5M230 360q60-15 120 5M230 420q60-15 120 5M450 305q60-20 120-5M450 365q60-20 120-5M450 425q60-20 120-5" stroke-width="8" stroke-opacity=".7"/>
+<path d="M400 120v70M365 150h70" stroke="#FFB27F"/></g>
+<rect x="60" y="600" width="90" height="8" rx="4" fill="#FF6000"/>
+<text x="60" y="665" font-family="Roboto,Arial,sans-serif" font-weight="900" font-size="54" fill="#fff">Estudios Bíblicos</text>
+<text x="60" y="715" font-family="Roboto,Arial,sans-serif" font-size="30" fill="#fff" fill-opacity=".85">Formación teológica · Técnico</text></svg>
