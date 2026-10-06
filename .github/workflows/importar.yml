@@ -1,0 +1,30 @@
+name: Importar archivos desde poliandes.com
+on:
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  importar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Descargar documentos e imagenes
+        run: |
+          UA="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126 Safari/537.36"
+          while IFS='|' read -r url dest; do
+            [ -z "$url" ] && continue
+            [ -f "$dest" ] && continue
+            mkdir -p "$(dirname "$dest")"
+            curl -fsSL -A "$UA" "$url" -o "$dest" && echo "OK $dest" || echo "FALLO $url"
+          done < importar.txt
+          for c in matricula calendario practicas reglamentos resoluciones comunicados formatos noticias; do
+            mkdir -p "documentos/$c"
+            [ -f "documentos/$c/LEEME.md" ] || printf "# Carpeta %s\n\nSuba aqui los archivos (PDF, Word, imagenes) de esta seccion: boton Add file > Upload files.\nEl nombre del archivo es el titulo que se vera en la pagina. Para quitar un documento, abralo y use el icono de papelera.\n" "$c" > "documentos/$c/LEEME.md"
+          done
+      - name: Guardar en el repositorio
+        run: |
+          git config user.name "POLIANDES"
+          git config user.email "poliandes@poliandes.com"
+          git add -A documentos img
+          git commit -m "Importar documentos e imagenes desde poliandes.com" || echo "Sin cambios"
+          git push
