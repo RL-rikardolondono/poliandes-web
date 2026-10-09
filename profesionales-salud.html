@@ -10,7 +10,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
 <style>
 :root{
-  --petroleo:#253B80; --petroleo-2:#031358; --ambar:#FF6000; --celeste:#179BD7; --verde:#1F8A4C;
+  --petroleo:#253B80; --petroleo-2:#031358; --ambar:#C9A24A; --celeste:#2A7AB0; --verde:#1F8A4C;
   --fondo:#F7FCFE; --sup:#FFFFFF; --texto:#222222; --suave:#5F6B7A; --borde:#D9E4EE;
 }
 *{box-sizing:border-box}
@@ -33,20 +33,20 @@ a{color:var(--petroleo)}
 
 /* Hero */
 .hero{background:linear-gradient(135deg,var(--petroleo-2) 0%,var(--petroleo) 55%,var(--celeste) 130%);color:#fff;padding:56px 0 64px}
-.etiqueta{display:inline-block;background:var(--ambar);color:#fff;font-weight:700;font-size:.8rem;text-transform:uppercase;letter-spacing:1px;padding:4px 10px;border-radius:4px;margin-bottom:14px}
+.etiqueta{display:inline-block;background:var(--ambar);color:#031358;font-weight:700;font-size:.8rem;text-transform:uppercase;letter-spacing:1px;padding:4px 10px;border-radius:4px;margin-bottom:14px}
 .hero h1{font-size:clamp(2.2rem,5vw,3.4rem)}
 .hero p{max-width:680px;font-size:1.1rem;opacity:.92;margin:0 0 24px}
 .btns{display:flex;gap:12px;flex-wrap:wrap}
 .btn{display:inline-flex;align-items:center;gap:8px;border:0;border-radius:8px;padding:12px 20px;font:700 1rem "Roboto",system-ui,sans-serif;cursor:pointer;text-decoration:none}
 .btn-wa{background:var(--verde);color:#fff}
 .btn-wa:hover{filter:brightness(1.08)}
-.btn-ambar{background:var(--ambar);color:#fff}
+.btn-ambar{background:var(--ambar);color:#031358}
 .btn-ambar:hover{filter:brightness(1.08)}
 .btn-borde{background:transparent;color:#fff;border:2px solid rgba(255,255,255,.6)}
 .btn-pri{background:var(--petroleo);color:#fff}
 
 /* Banner revista */
-.revista{display:none;background:#FFF1E8;border-left:6px solid var(--ambar);padding:18px 0}
+.revista{display:none;background:#FBF5E6;border-left:6px solid var(--ambar);padding:18px 0}
 .revista.on{display:block}
 .revista .wrap{display:flex;gap:16px;align-items:center;flex-wrap:wrap;justify-content:space-between}
 .revista strong{font-family:"Roboto",sans-serif;font-size:1.3rem}
@@ -54,7 +54,7 @@ a{color:var(--petroleo)}
 /* Gold */
 .gold{margin-top:-32px}
 .gold-card{background:var(--sup);border-radius:14px;box-shadow:0 8px 28px rgba(21,35,43,.12);padding:28px;display:grid;grid-template-columns:auto 1fr;gap:24px;align-items:center;border-top:6px solid var(--ambar)}
-.cien{font-family:"Roboto",sans-serif;font-weight:700;font-size:4.2rem;color:var(--ambar);line-height:1}
+.cien{font-family:"Roboto",sans-serif;font-weight:700;font-size:4.2rem;color:#8A6A1F;line-height:1}
 .cien small{display:block;font-size:1rem;color:var(--petroleo);letter-spacing:1px;text-transform:uppercase}
 .gold-card h2{font-size:1.8rem;color:var(--petroleo)}
 .gold-card ul{margin:.4em 0 0;padding-left:1.1em}
@@ -77,7 +77,7 @@ section{padding:48px 0}
 .curso p{margin:0;color:var(--suave);font-size:.92rem;flex:1}
 .precio{display:flex;justify-content:space-between;align-items:baseline;gap:8px;border-top:1px dashed var(--borde);padding-top:8px}
 .precio b{font-size:1.25rem;color:var(--petroleo)}
-.precio span{font-size:.82rem;color:var(--ambar);font-weight:700;text-align:right}
+.precio span{font-size:.82rem;color:#8A6A1F;font-weight:700;text-align:right}
 .modal{display:inline-block;background:var(--celeste);color:#fff;font-size:.75rem;font-weight:700;padding:2px 8px;border-radius:4px;letter-spacing:.5px;align-self:flex-start}
 .total{font-weight:700;color:var(--petroleo);margin:.4em 0 0}
 .curso .btn{padding:9px 14px;font-size:.9rem;justify-content:center}
@@ -86,7 +86,7 @@ section{padding:48px 0}
 /* Pasos */
 .pasos{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;counter-reset:p}
 .paso{background:var(--sup);border-radius:12px;padding:20px;border:1px solid var(--borde)}
-.paso::before{counter-increment:p;content:counter(p);font-family:"Roboto",sans-serif;font-weight:700;font-size:2rem;color:var(--ambar)}
+.paso::before{counter-increment:p;content:counter(p);font-family:"Roboto",sans-serif;font-weight:700;font-size:2rem;color:#8A6A1F}
 .paso h4{margin:.2em 0;font-size:1.05rem}
 .paso p{margin:0;color:var(--suave);font-size:.93rem}
 
@@ -126,9 +126,9 @@ footer a{color:#fff}
 .credito svg{width:20px;height:20px}
 
 /* Menú general del sitio */
-.aviso-top,header.top{--azul:#253B80;--azul-osc:#031358;--celeste:#179BD7;--naranja:#FF6000;--fondo:#F7FCFE;--texto:#222}
-.aviso-top{background:var(--naranja);color:#fff;font-size:.9rem;text-align:center;padding:6px 16px}
-.aviso-top a{color:#fff;font-weight:700}
+.aviso-top,header.top{--azul:#253B80;--azul-osc:#031358;--celeste:#2A7AB0;--naranja:#C9A24A;--oro-osc:#8A6A1F;--fondo:#F7FCFE;--texto:#222}
+.aviso-top{background:var(--azul-osc);color:#fff;border-bottom:2px solid var(--naranja);font-size:.9rem;text-align:center;padding:6px 16px}
+.aviso-top a{color:#E6CF94;font-weight:700}
 header.top{background:var(--azul);position:sticky;top:0;z-index:50;box-shadow:0 2px 10px rgba(0,0,0,.15)}
 header.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:64px}
 .marca{display:flex;align-items:center;gap:10px;color:#fff;text-decoration:none;font-weight:900;font-size:1.3rem;letter-spacing:1px}
@@ -137,7 +137,7 @@ header.top .wrap{display:flex;align-items:center;justify-content:space-between;g
 nav.menu{display:flex;gap:2px;align-items:center;flex-wrap:nowrap;white-space:nowrap}
 nav.menu>a,nav.menu .dd>button{color:#fff;text-decoration:none;font:500 .92rem "Roboto",sans-serif;padding:10px 9px;border-radius:6px;background:none;border:0;cursor:pointer}
 nav.menu>a:hover,nav.menu .dd>button:hover,nav.menu a.activo{background:rgba(255,255,255,.12)}
-nav.menu a.cta{background:var(--naranja);margin-left:6px}
+nav.menu a.cta{background:var(--naranja);color:var(--azul-osc)!important;font-weight:700;margin-left:6px}
 .dd{position:relative}
 .dd .sub{display:none;position:absolute;top:100%;left:0;background:#fff;min-width:250px;border-radius:8px;box-shadow:0 10px 30px rgba(0,0,0,.18);padding:8px;z-index:60}
 .dd:hover .sub,.dd:focus-within .sub{display:block}
