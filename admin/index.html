@@ -1,0 +1,644 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Panel de administración | POLIANDES</title>
+<link rel="icon" href="/img/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--azul:#0B4F8A;--azul2:#1867B0;--verde:#14A38B;--verde-osc:#0E8571;--wa:#1F8A4C;--fondo:#F4F8FB;--texto:#1C2B39;--suave:#5D6B78;--borde:#DCE5EE;--azul-claro:#E8F1FA;--verde-claro:#E3F6F2;--rojo:#C0392B;--rojo-claro:#FDECEA}
+*{box-sizing:border-box}
+body{margin:0;background:var(--fondo);color:var(--texto);font-family:'Public Sans',system-ui,sans-serif;font-size:16px;line-height:1.55}
+h1,h2,h3{font-family:'Barlow Condensed',system-ui,sans-serif;margin:0 0 .4em;line-height:1.15}
+h1{font-size:2rem}h2{font-size:1.6rem}h3{font-size:1.25rem}
+a{color:var(--azul2)}
+.oculto{display:none!important}
+.barra{background:#fff;box-shadow:0 2px 12px rgba(28,43,57,.08);position:sticky;top:0;z-index:20}
+.barra__in{max-width:1100px;margin:0 auto;padding:0 16px;height:64px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.marca{display:flex;align-items:center;gap:10px;font-family:'Barlow Condensed',system-ui,sans-serif;font-weight:700;font-size:1.2rem}
+.marca img{width:38px;height:38px;flex:none}
+.marca small{display:block;font-family:'Public Sans',system-ui,sans-serif;font-weight:500;font-size:.75rem;color:var(--suave)}
+.acciones-barra{display:flex;gap:8px;flex-wrap:wrap}
+main{max-width:1100px;margin:0 auto;padding:24px 16px 60px}
+.caja{background:#fff;border:1px solid var(--borde);border-radius:14px;padding:22px;box-shadow:0 2px 14px rgba(11,79,138,.06);margin-bottom:18px}
+.boton{display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:10px 16px;border-radius:10px;border:0;font:inherit;font-weight:600;cursor:pointer;text-decoration:none;white-space:nowrap}
+.boton:disabled{opacity:.55;cursor:not-allowed}
+.b-principal{background:var(--azul);color:#fff}.b-principal:hover{background:var(--azul2)}
+.b-accion{background:var(--verde);color:#fff}.b-accion:hover{background:var(--verde-osc)}
+.b-borde{background:#fff;color:var(--azul);border:1.5px solid var(--borde)}.b-borde:hover{border-color:var(--azul2)}
+.b-peligro{background:#fff;color:var(--rojo);border:1.5px solid #f1c6c0}.b-peligro:hover{background:var(--rojo-claro)}
+.b-chico{padding:6px 11px;font-size:.88rem}
+.b-grande{padding:14px 24px;font-size:1.05rem}
+label{display:block;font-weight:600;margin:14px 0 6px}
+.ayuda{font-weight:400;color:var(--suave);font-size:.88rem;margin-top:4px}
+input[type=text],input[type=url],input[type=date],input[type=password],select,textarea{width:100%;padding:11px 12px;border:1.5px solid var(--borde);border-radius:10px;font:inherit;background:#fff;color:var(--texto)}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--verde);box-shadow:0 0 0 3px var(--verde-claro)}
+textarea{min-height:200px;resize:vertical;line-height:1.6}
+.fila{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:700px){.fila{grid-template-columns:1fr}}
+.pestanas{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:18px}
+.pestana{background:#fff;border:1.5px solid var(--borde);padding:10px 16px;border-radius:10px;font:inherit;font-weight:600;cursor:pointer;color:var(--texto)}
+.pestana[aria-selected=true]{background:var(--verde);border-color:var(--verde);color:#fff}
+.cabeza{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.lista{display:flex;flex-direction:column;gap:10px}
+.item{display:flex;gap:14px;align-items:center;background:#fff;border:1px solid var(--borde);border-radius:12px;padding:10px}
+.item img,.item .sin-foto{width:84px;height:62px;object-fit:cover;border-radius:8px;background:var(--azul-claro);flex:none;display:grid;place-items:center;color:var(--azul);font-weight:700;font-size:.8rem}
+.item__txt{flex:1;min-width:0}
+.item__txt b{display:block;overflow:hidden;text-overflow:ellipsis}
+.item__txt span{color:var(--suave);font-size:.88rem}
+.item__btn{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}
+@media(max-width:600px){.item{flex-wrap:wrap}.item__btn{width:100%;justify-content:flex-start}}
+.subir{border:2px dashed var(--borde);border-radius:12px;padding:18px;text-align:center;background:var(--azul-claro);cursor:pointer;color:var(--azul);font-weight:600;margin:0}
+.subir:hover{border-color:var(--azul2)}
+.vista-foto{width:100%;max-width:320px;aspect-ratio:16/9;object-fit:cover;border-radius:10px;background:var(--azul-claro);display:block;margin-bottom:8px}
+.aviso{padding:12px 14px;border-radius:10px;margin:12px 0;font-weight:500}
+.aviso.ok{background:var(--verde-claro);color:var(--verde-osc)}
+.aviso.error{background:var(--rojo-claro);color:var(--rojo)}
+.aviso.info{background:var(--azul-claro);color:var(--azul)}
+.pie-acciones{display:flex;gap:10px;flex-wrap:wrap;justify-content:flex-end;margin-top:20px;padding-top:16px;border-top:1px solid var(--borde)}
+.cargando{position:fixed;inset:0;background:rgba(244,248,251,.88);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:14px;z-index:100;font-weight:600;color:var(--azul);text-align:center;padding:20px}
+.rueda{width:46px;height:46px;border:5px solid var(--azul-claro);border-top-color:var(--verde);border-radius:50%;animation:g 1s linear infinite}
+@keyframes g{to{transform:rotate(360deg)}}
+.pasos{padding-left:22px}.pasos li{margin-bottom:8px}
+.ingreso{max-width:560px;margin:40px auto}
+.firma{text-align:center;color:var(--suave);font-size:.82rem;padding:20px 16px 30px}
+.chk{display:flex;gap:8px;align-items:center;font-weight:500;margin-top:12px}
+.chk input{width:18px;height:18px}
+.galeria-adm{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:12px}
+.gfoto{background:#fff;border:1px solid var(--borde);border-radius:12px;overflow:hidden;display:flex;flex-direction:column}
+.gfoto img{width:100%;aspect-ratio:1/1;object-fit:cover}
+.gfoto div{padding:8px;display:flex;flex-direction:column;gap:6px}
+.gfoto input{padding:7px 9px;font-size:.88rem}
+.gfoto .btns{display:flex;gap:4px;flex-wrap:wrap}
+</style>
+</head>
+<body>
+<header class="barra"><div class="barra__in">
+  <div class="marca"><img src="/img/logo.png" alt=""><div>Panel de la página<small id="nombre-sitio">www.poliandes.com</small></div></div>
+  <div class="acciones-barra oculto" id="acciones-barra">
+    <a class="boton b-borde b-chico" href="/" target="_blank" rel="noopener">Ver la página</a>
+    <button class="boton b-borde b-chico" type="button" id="btn-salir">Salir</button>
+  </div>
+</div></header>
+
+<main>
+  <!-- INGRESO -->
+  <section id="vista-ingreso" class="ingreso">
+    <div class="caja">
+      <h1>Entrar al panel</h1>
+      <p>Pegue aquí la <b>llave de acceso</b> de GitHub de esta página. La llave solo sirve para la página de POLIANDES y queda guardada únicamente en este equipo.</p>
+      <label for="llave">Llave de acceso</label>
+      <input type="password" id="llave" autocomplete="off" placeholder="github_pat_…">
+      <label class="chk"><input type="checkbox" id="recordar" checked> Recordar en este equipo (no lo marque en computadores ajenos)</label>
+      <div id="aviso-ingreso"></div>
+      <div class="pie-acciones"><button class="boton b-principal b-grande" id="btn-entrar" type="button">Entrar</button></div>
+    </div>
+    <details class="caja">
+      <summary><b>¿No tiene la llave? Cómo crearla (una sola vez)</b></summary>
+      <ol class="pasos">
+        <li>Inicie sesión en GitHub y abra <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener">esta página para crear la llave</a>.</li>
+        <li>En <b>Token name</b> escriba: <i>Panel POLIANDES</i>. En <b>Expiration</b> elija <b>No expiration</b> (o la fecha que prefiera).</li>
+        <li>En <b>Repository access</b> elija <b>Only select repositories</b> y marque solo el repositorio <b id="nombre-repo">poliandes-web</b>.</li>
+        <li>En <b>Permissions → Repository permissions</b>, busque <b>Contents</b> y cámbielo a <b>Read and write</b>. No active nada más.</li>
+        <li>Pulse <b>Generate token</b>, copie la llave (empieza por <code>github_pat_</code>) y péguela arriba.</li>
+      </ol>
+      <p class="ayuda">Puede darle la misma llave a la persona de POLIANDES que actualizará la página. Guárdela en un lugar seguro; si la pierde o cree que alguien la vio, bórrela en GitHub y cree otra igual.</p>
+    </details>
+  </section>
+
+  <!-- PANEL -->
+  <section id="vista-panel" class="oculto">
+    <div class="pestanas" role="tablist">
+      <button class="pestana" role="tab" aria-selected="true" data-pestana="noticias">Noticias</button>
+      <button class="pestana" role="tab" aria-selected="false" data-pestana="eventos">Eventos</button>
+      <button class="pestana" role="tab" aria-selected="false" data-pestana="videos">Videos</button>
+      <button class="pestana" role="tab" aria-selected="false" data-pestana="galeria">Fotos</button>
+      <button class="pestana" role="tab" aria-selected="false" data-pestana="documentos">Documentos</button>
+    </div>
+    <div id="aviso-panel"></div>
+
+    <!-- Noticias -->
+    <div data-panel="noticias">
+      <div class="caja cabeza">
+        <div><h2 style="margin:0">Noticias · HOY en POLIANDES</h2><span class="ayuda">Las 4 más recientes salen en la página de inicio; todas salen en «HOY en POLIANDES».</span></div>
+        <button class="boton b-accion b-grande" type="button" id="btn-nueva-noticia">+ Nueva noticia</button>
+      </div>
+      <div class="caja oculto" id="editor-noticia">
+        <h3 id="titulo-editor-noticia">Nueva noticia</h3>
+        <label for="n-titulo">Título</label><input type="text" id="n-titulo" maxlength="160" placeholder="Ej.: Abiertas las inscripciones 2027-1">
+        <div class="fila">
+          <div><label for="n-fecha">Fecha</label><input type="date" id="n-fecha"></div>
+          <div><label for="n-video">Video <span class="ayuda">(opcional: YouTube, TikTok, Facebook o Instagram)</span></label><input type="url" id="n-video" placeholder="https://…"></div>
+        </div>
+        <label for="n-texto">Texto</label>
+        <textarea id="n-texto" placeholder="Escriba aquí. Deje una línea en blanco entre párrafos."></textarea>
+        <div class="ayuda">Una línea en blanco separa los párrafos. Las direcciones web (https://…) se convierten solas en enlaces.</div>
+        <label>Foto <span class="ayuda">(opcional)</span></label>
+        <img id="n-vista" class="vista-foto oculto" alt="">
+        <div style="display:flex;gap:8px;flex-wrap:wrap">
+          <label class="subir" for="n-foto" style="flex:1">📷 Elegir foto</label><input type="file" id="n-foto" accept="image/*" class="oculto">
+          <button class="boton b-peligro b-chico oculto" type="button" id="n-quitar-foto">Quitar foto</button>
+        </div>
+        <div class="fila">
+          <div><label for="n-enlace">Botón con enlace <span class="ayuda">(opcional)</span></label><input type="text" id="n-enlace" placeholder="/aspirantes.html o https://…"></div>
+          <div><label for="n-textoenlace">Texto del botón</label><input type="text" id="n-textoenlace" placeholder="Ej.: Inscribirme"></div>
+        </div>
+        <div id="aviso-noticia"></div>
+        <div class="pie-acciones">
+          <button class="boton b-borde" type="button" id="btn-cancelar-noticia">Cancelar</button>
+          <button class="boton b-accion b-grande" type="button" id="btn-guardar-noticia">Publicar</button>
+        </div>
+      </div>
+      <div class="lista" id="lista-noticias"></div>
+    </div>
+
+    <!-- Eventos -->
+    <div data-panel="eventos" class="oculto">
+      <div class="caja cabeza">
+        <div><h2 style="margin:0">Eventos</h2><span class="ayuda">Los eventos ya pasados se ocultan solos en la página.</span></div>
+        <button class="boton b-accion b-grande" type="button" id="btn-nuevo-evento">+ Nuevo evento</button>
+      </div>
+      <div class="caja oculto" id="editor-evento">
+        <h3 id="titulo-editor-evento">Nuevo evento</h3>
+        <div class="fila">
+          <div><label for="e-titulo">Título</label><input type="text" id="e-titulo" maxlength="120"></div>
+          <div><label for="e-fecha">Fecha</label><input type="date" id="e-fecha"></div>
+        </div>
+        <label for="e-detalle">Detalle <span class="ayuda">(hora, lugar, cómo inscribirse)</span></label><input type="text" id="e-detalle" maxlength="200">
+        <label for="e-enlace">Enlace <span class="ayuda">(opcional)</span></label><input type="text" id="e-enlace" placeholder="/diplomado-autismo.html o https://…">
+        <div id="aviso-evento"></div>
+        <div class="pie-acciones">
+          <button class="boton b-borde" type="button" id="btn-cancelar-evento">Cancelar</button>
+          <button class="boton b-accion b-grande" type="button" id="btn-guardar-evento">Publicar</button>
+        </div>
+      </div>
+      <div class="lista" id="lista-eventos"></div>
+    </div>
+
+    <!-- Videos -->
+    <div data-panel="videos" class="oculto">
+      <div class="caja cabeza">
+        <div><h2 style="margin:0">Videos</h2><span class="ayuda">Los videos se quedan en YouTube, TikTok, Facebook o Instagram: la página solo los muestra, no ocupan espacio. Los 6 primeros salen en la página de inicio.</span></div>
+        <button class="boton b-accion b-grande" type="button" id="btn-nuevo-video">+ Agregar video</button>
+      </div>
+      <div class="caja oculto" id="editor-video">
+        <h3 id="titulo-editor-video">Agregar video</h3>
+        <label for="v-url">Dirección del video</label><input type="url" id="v-url" placeholder="https://www.youtube.com/watch?v=… · https://www.tiktok.com/@…/video/…">
+        <div class="ayuda">En YouTube, TikTok, Facebook o Instagram pulse «Compartir» → «Copiar enlace» y péguelo aquí. En TikTok use el enlace completo que contiene «/video/».</div>
+        <label for="v-titulo">Título que se verá debajo del video</label><input type="text" id="v-titulo" maxlength="120">
+        <div id="aviso-video"></div>
+        <div class="pie-acciones">
+          <button class="boton b-borde" type="button" id="btn-cancelar-video">Cancelar</button>
+          <button class="boton b-accion b-grande" type="button" id="btn-guardar-video">Publicar</button>
+        </div>
+      </div>
+      <div class="lista" id="lista-videos"></div>
+    </div>
+
+    <!-- Galería -->
+    <div data-panel="galeria" class="oculto">
+      <div class="caja">
+        <div class="cabeza"><div><h2 style="margin:0">Fotos · Vida en POLIANDES</h2><span class="ayuda">Galería de la página de inicio. Puede agregar, ordenar y quitar fotos; luego pulse «Publicar cambios».</span></div></div>
+        <label class="subir" for="g-fotos" style="margin-top:14px">📷 Pulse aquí para agregar fotos (puede elegir varias)</label>
+        <input type="file" id="g-fotos" accept="image/*" multiple class="oculto">
+        <div class="ayuda">Las fotos se reducen solas para que la página cargue rápido.</div>
+      </div>
+      <div class="galeria-adm" id="lista-galeria"></div>
+      <div id="aviso-galeria"></div>
+      <div class="pie-acciones"><button class="boton b-accion b-grande" type="button" id="btn-guardar-galeria">Publicar cambios</button></div>
+    </div>
+
+    <!-- Documentos -->
+    <div data-panel="documentos" class="oculto">
+      <div class="caja">
+        <h2>Documentos y formatos</h2>
+        <p class="ayuda" style="margin-top:0">Los documentos (PDF, Word, Excel) aparecen solos en la sección correspondiente de la página. El nombre del archivo es el título que se verá, por eso póngale un nombre claro antes de subirlo (ej.: «Calendario académico 2027-1.pdf»).</p>
+        <label for="d-carpeta">Sección</label>
+        <select id="d-carpeta"></select>
+        <label class="subir" for="d-archivos" style="margin-top:14px">📄 Pulse aquí para subir documentos a esta sección</label>
+        <input type="file" id="d-archivos" multiple class="oculto" accept=".pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx,.jpg,.jpeg,.png">
+        <div id="aviso-documentos"></div>
+      </div>
+      <div class="lista" id="lista-documentos"></div>
+    </div>
+  </section>
+</main>
+<p class="firma">Panel desarrollado por SkyNet Genesis · contacto@skynetgenesis.com · WhatsApp 3044375758</p>
+
+<div class="cargando oculto" id="cargando"><div class="rueda"></div><div id="cargando-texto">Cargando…</div></div>
+
+<script>
+/* ===== Configuración de esta web (cambiar solo esto al copiar el panel a otra web) ===== */
+var CONFIG = {
+  dueno: 'rl-rikardolondono',
+  repo: 'poliandes-web',
+  rama: 'main',
+  sitio: 'www.poliandes.com',
+  claveLocal: 'panel-poliandes-llave',
+  datos: 'datos/contenido.json',
+  carpetaFotos: 'img/panel',
+  carpetas: {
+    matricula: 'Carpeta de matrícula', calendario: 'Calendario académico', practicas: 'Prácticas académicas',
+    reglamentos: 'Reglamentos', resoluciones: 'Resoluciones rectorales', comunicados: 'Comunicados',
+    formatos: 'Formatos y trámites', noticias: 'Publicaciones y avisos (HOY en POLIANDES)'
+  }
+};
+/* ======================================================================================= */
+
+var API = 'https://api.github.com/repos/' + CONFIG.dueno + '/' + CONFIG.repo;
+var estado = { llave: '', datos: null, commitBase: '', cambiosSinGuardar: false };
+var nuevasImagenes = {};  // ruta -> dataURL pendiente de subir
+var galeriaEdit = null;   // copia de la galería mientras se edita
+
+function $(id) { return document.getElementById(id); }
+function aviso(id, tipo, txt) { var el = $(id); el.innerHTML = ''; if (!txt) return; var d = document.createElement('div'); d.className = 'aviso ' + tipo; d.textContent = txt; el.appendChild(d); if (tipo !== 'info') d.scrollIntoView({ behavior: 'smooth', block: 'center' }); }
+function cargando(on, txt) { $('cargando').classList.toggle('oculto', !on); $('cargando-texto').textContent = txt || 'Cargando…'; }
+function leerLS(k) { try { return localStorage.getItem(k) || sessionStorage.getItem(k) || ''; } catch (e) { return ''; } }
+function guardarLS(k, v, recordar) { try { (recordar ? localStorage : sessionStorage).setItem(k, v); } catch (e) {} }
+function borrarLS(k) { try { localStorage.removeItem(k); sessionStorage.removeItem(k); } catch (e) {} }
+function clonar(o) { return JSON.parse(JSON.stringify(o)); }
+function esc(s) { return String(s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;'); }
+function hoyISO() { var d = new Date(); return d.getFullYear() + '-' + ('0' + (d.getMonth() + 1)).slice(-2) + '-' + ('0' + d.getDate()).slice(-2); }
+var MESES = ['ene', 'feb', 'mar', 'abr', 'may', 'jun', 'jul', 'ago', 'sep', 'oct', 'nov', 'dic'];
+function fechaTxt(f) { var p = String(f || '').split('-'); return p.length === 3 ? parseInt(p[2], 10) + ' ' + MESES[parseInt(p[1], 10) - 1] + ' ' + p[0] : ''; }
+function slug(t) { return String(t || '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '').slice(0, 60) || 'item'; }
+function idUnico(base, lista) { var s = slug(base), n = 2, id = s; while (lista.some(function (x) { return x.id === id; })) id = s + '-' + (n++); return id; }
+function boton(txt, clases, fn) { var b = document.createElement('button'); b.type = 'button'; b.className = 'boton ' + clases; b.textContent = txt; b.onclick = fn; return b; }
+function enlaceValido(u) { return !u || /^(https?:\/\/|\/)/.test(u); }
+
+function videoInfo(url) {
+  url = String(url || '').trim(); var m;
+  if ((m = url.match(/(?:youtube\.com\/(?:watch\?(?:.*&)?v=|shorts\/|embed\/|live\/)|youtu\.be\/)([\w-]{11})/))) return { tipo: 'YouTube', img: 'https://i.ytimg.com/vi/' + m[1] + '/hqdefault.jpg' };
+  if (/tiktok\.com\/.*\/video\/\d+/.test(url)) return { tipo: 'TikTok', img: '' };
+  if (/instagram\.com\/(?:reel|p|tv)\/[\w-]+/.test(url)) return { tipo: 'Instagram', img: '' };
+  if (/facebook\.com|fb\.watch/.test(url)) return { tipo: 'Facebook', img: '' };
+  return null;
+}
+
+/* ---------- GitHub ---------- */
+function gh(ruta, op) {
+  op = op || {};
+  var h = { 'Authorization': 'Bearer ' + estado.llave, 'Accept': op.accept || 'application/vnd.github+json', 'X-GitHub-Api-Version': '2022-11-28' };
+  if (op.body) h['Content-Type'] = 'application/json';
+  return fetch(ruta.indexOf('http') === 0 ? ruta : API + ruta, { method: op.method || 'GET', headers: h, body: op.body ? JSON.stringify(op.body) : undefined, cache: 'no-store' })
+    .then(function (r) {
+      if (op.accept === 'application/vnd.github.raw') return r.ok ? r.text() : r.text().then(function (t) { throw errorGH(r.status, t); });
+      return r.text().then(function (t) { var j = t ? JSON.parse(t) : {}; if (!r.ok) throw errorGH(r.status, j.message || t); return j; });
+    }, function () { throw errorGH(0, ''); });
+}
+function errorGH(st, msg) {
+  var e = new Error(msg); e.status = st;
+  if (st === 401) e.message = 'La llave no es válida o ya venció. Cree una nueva en GitHub y vuelva a entrar.';
+  else if (st === 403) e.message = 'La llave no tiene permiso para escribir en esta página. Revise que tenga «Contents: Read and write» sobre el repositorio ' + CONFIG.repo + '.';
+  else if (st === 404) e.message = 'No se encontró el repositorio ' + CONFIG.repo + ' con esta llave. Revise que la llave tenga acceso a ese repositorio.';
+  else if (!st) e.message = 'No hay conexión a internet. Intente de nuevo.';
+  return e;
+}
+function leerArchivo(ruta) { return gh('/contents/' + ruta + '?ref=' + CONFIG.rama, { accept: 'application/vnd.github.raw' }); }
+function refActual() { return gh('/git/ref/heads/' + CONFIG.rama).then(function (r) { return r.object.sha; }); }
+
+// Sube en UN solo cambio: textos, archivos nuevos (dataURL en base64) y archivos a borrar.
+function confirmarCambios(textos, archivos, borrar, mensaje) {
+  var base, arbolBase;
+  return refActual().then(function (sha) {
+    if (estado.commitBase && sha !== estado.commitBase) {
+      var e = new Error('La página fue modificada desde otro lugar mientras usted trabajaba. Pulse «Recargar» para traer la versión más reciente.');
+      e.recargar = true; throw e;
+    }
+    base = sha;
+    return gh('/git/commits/' + sha);
+  }).then(function (c) {
+    arbolBase = c.tree.sha;
+    var rutas = Object.keys(archivos);
+    return rutas.reduce(function (p, ruta, i) {
+      return p.then(function (acc) {
+        cargando(true, 'Subiendo archivo ' + (i + 1) + ' de ' + rutas.length + '…');
+        return gh('/git/blobs', { method: 'POST', body: { content: archivos[ruta].split(',')[1], encoding: 'base64' } })
+          .then(function (b) { acc.push({ path: ruta.replace(/^\//, ''), mode: '100644', type: 'blob', sha: b.sha }); return acc; });
+      });
+    }, Promise.resolve([]));
+  }).then(function (arbol) {
+    cargando(true, 'Publicando…');
+    Object.keys(textos).forEach(function (ruta) { arbol.push({ path: ruta, mode: '100644', type: 'blob', content: textos[ruta] }); });
+    borrar.forEach(function (ruta) { arbol.push({ path: ruta.replace(/^\//, ''), mode: '100644', type: 'blob', sha: null }); });
+    return gh('/git/trees', { method: 'POST', body: { base_tree: arbolBase, tree: arbol } });
+  }).then(function (t) {
+    return gh('/git/commits', { method: 'POST', body: { message: mensaje, tree: t.sha, parents: [base] } });
+  }).then(function (c) {
+    return gh('/git/refs/heads/' + CONFIG.rama, { method: 'PATCH', body: { sha: c.sha } }).then(function () { estado.commitBase = c.sha; return c; });
+  });
+}
+
+// Fotos subidas por el panel que ya no se usan: se borran (solo las de img/panel).
+function fotosUsadas(d) { var s = JSON.stringify(d), r = {}; (s.match(/\/img\/panel\/[\w.-]+/g) || []).forEach(function (x) { r[x] = 1; }); return r; }
+
+// Publica los datos «cand». Solo si sale bien pasan a ser el estado.
+function publicar(cand, mensaje, avisoId, alTerminar) {
+  cargando(true, 'Preparando…');
+  var antes = fotosUsadas(estado.datos), ahora = fotosUsadas(cand);
+  var imgs = {}; Object.keys(nuevasImagenes).forEach(function (r) { if (ahora[r]) imgs[r] = nuevasImagenes[r]; });
+  var borrar = Object.keys(antes).filter(function (r) { return !ahora[r]; });
+  var textos = {}; textos[CONFIG.datos] = JSON.stringify(cand, null, 1);
+  return confirmarCambios(textos, imgs, borrar, mensaje).then(function () {
+    estado.datos = cand; nuevasImagenes = {}; estado.cambiosSinGuardar = false;
+    cargando(false);
+    if (alTerminar) alTerminar();
+    aviso('aviso-panel', 'ok', '✔ Publicado. La página se actualiza en 1 o 2 minutos (si no ve el cambio, recargue la página).');
+    return true;
+  }).catch(function (e) {
+    cargando(false);
+    aviso(avisoId, 'error', 'No se pudo publicar: ' + e.message);
+    if (e.recargar) { var b = boton('Recargar', 'b-principal b-chico', function () { estado.cambiosSinGuardar = false; location.reload(); }); b.style.marginTop = '8px'; $(avisoId).appendChild(b); }
+    return false;
+  });
+}
+
+/* ---------- Ingreso ---------- */
+function entrar(llave, recordar) {
+  estado.llave = llave.trim();
+  if (!/^(github_pat_|ghp_)/.test(estado.llave)) { aviso('aviso-ingreso', 'error', 'Eso no parece una llave de GitHub. Debe empezar por «github_pat_».'); return; }
+  cargando(true, 'Entrando…');
+  gh('').then(function (repo) {
+    if (repo.permissions && !repo.permissions.push) throw errorGH(403);
+    return Promise.all([refActual(), leerArchivo(CONFIG.datos)]);
+  }).then(function (r) {
+    estado.commitBase = r[0];
+    estado.datos = JSON.parse(r[1]);
+    ['noticias', 'eventos', 'videos', 'galeria'].forEach(function (k) { if (!estado.datos[k]) estado.datos[k] = []; });
+    guardarLS(CONFIG.claveLocal, estado.llave, recordar);
+    $('vista-ingreso').classList.add('oculto'); $('vista-panel').classList.remove('oculto'); $('acciones-barra').classList.remove('oculto');
+    cargando(false); pintarTodo();
+  }).catch(function (e) {
+    cargando(false); estado.llave = '';
+    if (e.status === 401) borrarLS(CONFIG.claveLocal);
+    $('vista-ingreso').classList.remove('oculto');
+    aviso('aviso-ingreso', 'error', e.message);
+  });
+}
+$('btn-entrar').onclick = function () { entrar($('llave').value, $('recordar').checked); };
+$('llave').addEventListener('keydown', function (e) { if (e.key === 'Enter') $('btn-entrar').click(); });
+$('btn-salir').onclick = function () {
+  if (estado.cambiosSinGuardar && !confirm('Tiene cambios sin publicar. ¿Salir de todos modos?')) return;
+  borrarLS(CONFIG.claveLocal); estado.cambiosSinGuardar = false; location.reload();
+};
+window.addEventListener('beforeunload', function (e) { if (estado.cambiosSinGuardar) { e.preventDefault(); e.returnValue = ''; } });
+(function () { var g = leerLS(CONFIG.claveLocal); if (g) entrar(g, true); })();
+
+/* ---------- Pestañas ---------- */
+function verPanel(nombre) {
+  document.querySelectorAll('[data-panel]').forEach(function (p) { p.classList.toggle('oculto', p.getAttribute('data-panel') !== nombre); });
+  document.querySelectorAll('.pestana').forEach(function (b) { b.setAttribute('aria-selected', b.getAttribute('data-pestana') === nombre ? 'true' : 'false'); });
+  if (nombre === 'documentos') cargarDocumentos();
+  window.scrollTo(0, 0);
+}
+document.querySelectorAll('.pestana').forEach(function (b) {
+  b.onclick = function () {
+    if (estado.cambiosSinGuardar && !confirm('Tiene cambios sin publicar. ¿Cambiar de sección y descartarlos?')) return;
+    estado.cambiosSinGuardar = false; nuevasImagenes = {}; pintarTodo();
+    aviso('aviso-panel', '', ''); verPanel(b.getAttribute('data-pestana'));
+  };
+});
+function pintarTodo() {
+  ['noticia', 'evento', 'video'].forEach(function (k) { $('editor-' + k).classList.add('oculto'); });
+  pintarNoticias(); pintarEventos(); pintarVideos(); galeriaEdit = clonar(estado.datos.galeria); pintarGaleria();
+}
+document.querySelectorAll('input,textarea').forEach(function (el) { if (el.id !== 'llave') el.addEventListener('input', function () { estado.cambiosSinGuardar = true; }); });
+
+/* ---------- Imágenes ---------- */
+function reducirImagen(archivo, max, calidad) {
+  return new Promise(function (ok, mal) {
+    var url = URL.createObjectURL(archivo), im = new Image();
+    im.onload = function () {
+      var s = Math.min(1, max / Math.max(im.naturalWidth, im.naturalHeight));
+      var c = document.createElement('canvas'); c.width = Math.round(im.naturalWidth * s); c.height = Math.round(im.naturalHeight * s);
+      var x = c.getContext('2d'); x.fillStyle = '#fff'; x.fillRect(0, 0, c.width, c.height); x.drawImage(im, 0, 0, c.width, c.height);
+      URL.revokeObjectURL(url); ok(c.toDataURL('image/jpeg', calidad || 0.82));
+    };
+    im.onerror = function () { URL.revokeObjectURL(url); mal(new Error('No se pudo leer la foto «' + archivo.name + '». Si es una foto de iPhone (HEIC), envíesela primero por WhatsApp o tómele una captura de pantalla y súbala de nuevo.')); };
+    im.src = url;
+  });
+}
+function srcImagen(ruta) { return nuevasImagenes[ruta] || ruta; }
+function rutaNueva() { return '/' + CONFIG.carpetaFotos + '/f-' + Date.now().toString(36) + Math.random().toString(36).slice(2, 5) + '.jpg'; }
+
+/* ---------- Noticias ---------- */
+var noticiaEdit = null, noticiaNueva = false;
+function pintarNoticias() {
+  var ul = $('lista-noticias'); ul.innerHTML = '';
+  var lista = estado.datos.noticias.slice().sort(function (a, b) { return (b.fecha || '').localeCompare(a.fecha || ''); });
+  if (!lista.length) { ul.innerHTML = '<div class="caja ayuda">Todavía no hay noticias.</div>'; return; }
+  lista.forEach(function (n) {
+    var it = document.createElement('div'); it.className = 'item';
+    it.innerHTML = (n.foto ? '<img src="' + esc(n.foto) + '" alt="">' : '<div class="sin-foto">Noticia</div>') + '<div class="item__txt"><b>' + esc(n.titulo) + '</b><span>' + fechaTxt(n.fecha) + '</span></div>';
+    var acc = document.createElement('div'); acc.className = 'item__btn';
+    acc.appendChild(boton('Ver', 'b-borde b-chico', function () { window.open('/noticias.html#n-' + n.id, '_blank'); }));
+    acc.appendChild(boton('Editar', 'b-principal b-chico', function () { abrirNoticia(n); }));
+    acc.appendChild(boton('Eliminar', 'b-peligro b-chico', function () {
+      if (!confirm('¿Eliminar la noticia «' + n.titulo + '»?')) return;
+      var cand = clonar(estado.datos); cand.noticias = cand.noticias.filter(function (x) { return x.id !== n.id; });
+      publicar(cand, 'Noticia eliminada: ' + n.titulo, 'aviso-panel', pintarNoticias);
+    }));
+    it.appendChild(acc); ul.appendChild(it);
+  });
+}
+function abrirNoticia(n) {
+  noticiaNueva = !n;
+  noticiaEdit = n ? clonar(n) : { id: '', fecha: hoyISO(), titulo: '', texto: '', foto: '', enlace: '', textoEnlace: '', video: '' };
+  $('titulo-editor-noticia').textContent = n ? 'Editar noticia' : 'Nueva noticia';
+  $('n-titulo').value = noticiaEdit.titulo; $('n-fecha').value = noticiaEdit.fecha; $('n-texto').value = noticiaEdit.texto;
+  $('n-video').value = noticiaEdit.video || ''; $('n-enlace').value = noticiaEdit.enlace || ''; $('n-textoenlace').value = noticiaEdit.textoEnlace || '';
+  pintarFotoNoticia(); aviso('aviso-noticia', '', '');
+  $('editor-noticia').classList.remove('oculto'); $('editor-noticia').scrollIntoView({ behavior: 'smooth' });
+  estado.cambiosSinGuardar = false;
+}
+function pintarFotoNoticia() {
+  var v = $('n-vista');
+  if (noticiaEdit.foto) { v.src = srcImagen(noticiaEdit.foto); v.classList.remove('oculto'); $('n-quitar-foto').classList.remove('oculto'); }
+  else { v.classList.add('oculto'); $('n-quitar-foto').classList.add('oculto'); }
+}
+$('btn-nueva-noticia').onclick = function () { abrirNoticia(null); };
+$('n-foto').addEventListener('change', function () {
+  var a = this.files[0]; this.value = ''; if (!a) return;
+  cargando(true, 'Preparando la foto…');
+  reducirImagen(a, 1600, 0.82).then(function (d) { var r = rutaNueva(); nuevasImagenes[r] = d; noticiaEdit.foto = r; estado.cambiosSinGuardar = true; cargando(false); pintarFotoNoticia(); })
+    .catch(function (e) { cargando(false); aviso('aviso-noticia', 'error', e.message); });
+});
+$('n-quitar-foto').onclick = function () { noticiaEdit.foto = ''; estado.cambiosSinGuardar = true; pintarFotoNoticia(); };
+$('btn-cancelar-noticia').onclick = function () { estado.cambiosSinGuardar = false; nuevasImagenes = {}; $('editor-noticia').classList.add('oculto'); };
+$('btn-guardar-noticia').onclick = function () {
+  var n = noticiaEdit;
+  n.titulo = $('n-titulo').value.trim(); n.fecha = $('n-fecha').value || hoyISO(); n.texto = $('n-texto').value.replace(/\r/g, '').trim();
+  n.video = $('n-video').value.trim(); n.enlace = $('n-enlace').value.trim(); n.textoEnlace = n.enlace ? ($('n-textoenlace').value.trim() || 'Ver más') : '';
+  if (!n.titulo) return aviso('aviso-noticia', 'error', 'Escriba el título.');
+  if (!n.texto) return aviso('aviso-noticia', 'error', 'Escriba el texto de la noticia.');
+  if (n.video && !videoInfo(n.video)) return aviso('aviso-noticia', 'error', 'La dirección del video no se reconoce. Cópiela desde el botón «Compartir» de YouTube, TikTok, Facebook o Instagram.');
+  if (!enlaceValido(n.enlace)) return aviso('aviso-noticia', 'error', 'El enlace del botón debe empezar por https:// o por / (página de este sitio).');
+  var cand = clonar(estado.datos);
+  if (noticiaNueva) { n.id = idUnico(n.titulo, cand.noticias); cand.noticias.push(n); }
+  else cand.noticias = cand.noticias.map(function (x) { return x.id === n.id ? n : x; });
+  publicar(cand, (noticiaNueva ? 'Nueva noticia: ' : 'Noticia editada: ') + n.titulo, 'aviso-noticia', function () { $('editor-noticia').classList.add('oculto'); pintarNoticias(); });
+};
+
+/* ---------- Eventos ---------- */
+var eventoEdit = null, eventoNuevo = false;
+function pintarEventos() {
+  var ul = $('lista-eventos'); ul.innerHTML = ''; var h = hoyISO();
+  var lista = estado.datos.eventos.slice().sort(function (a, b) { return (a.fecha || '').localeCompare(b.fecha || ''); });
+  if (!lista.length) { ul.innerHTML = '<div class="caja ayuda">No hay eventos.</div>'; return; }
+  lista.forEach(function (x) {
+    var pasado = (x.fecha || '') < h;
+    var it = document.createElement('div'); it.className = 'item'; if (pasado) it.style.opacity = '.6';
+    it.innerHTML = '<div class="sin-foto">' + fechaTxt(x.fecha).split(' ').slice(0, 2).join(' ') + '</div><div class="item__txt"><b>' + esc(x.titulo) + '</b><span>' + esc(x.detalle) + (pasado ? ' · (ya pasó, no se muestra)' : '') + '</span></div>';
+    var acc = document.createElement('div'); acc.className = 'item__btn';
+    acc.appendChild(boton('Editar', 'b-principal b-chico', function () { abrirEvento(x); }));
+    acc.appendChild(boton('Eliminar', 'b-peligro b-chico', function () {
+      if (!confirm('¿Eliminar el evento «' + x.titulo + '»?')) return;
+      var cand = clonar(estado.datos); cand.eventos = cand.eventos.filter(function (y) { return y.id !== x.id; });
+      publicar(cand, 'Evento eliminado: ' + x.titulo, 'aviso-panel', pintarEventos);
+    }));
+    it.appendChild(acc); ul.appendChild(it);
+  });
+}
+function abrirEvento(x) {
+  eventoNuevo = !x; eventoEdit = x ? clonar(x) : { id: '', fecha: hoyISO(), titulo: '', detalle: '', enlace: '' };
+  $('titulo-editor-evento').textContent = x ? 'Editar evento' : 'Nuevo evento';
+  $('e-titulo').value = eventoEdit.titulo; $('e-fecha').value = eventoEdit.fecha; $('e-detalle').value = eventoEdit.detalle; $('e-enlace').value = eventoEdit.enlace || '';
+  aviso('aviso-evento', '', ''); $('editor-evento').classList.remove('oculto'); estado.cambiosSinGuardar = false;
+}
+$('btn-nuevo-evento').onclick = function () { abrirEvento(null); };
+$('btn-cancelar-evento').onclick = function () { estado.cambiosSinGuardar = false; $('editor-evento').classList.add('oculto'); };
+$('btn-guardar-evento').onclick = function () {
+  var x = eventoEdit;
+  x.titulo = $('e-titulo').value.trim(); x.fecha = $('e-fecha').value; x.detalle = $('e-detalle').value.trim(); x.enlace = $('e-enlace').value.trim();
+  if (!x.titulo || !x.fecha) return aviso('aviso-evento', 'error', 'Escriba el título y la fecha del evento.');
+  if (!enlaceValido(x.enlace)) return aviso('aviso-evento', 'error', 'El enlace debe empezar por https:// o por / (página de este sitio).');
+  var cand = clonar(estado.datos);
+  if (eventoNuevo) { x.id = idUnico('ev-' + x.titulo, cand.eventos); cand.eventos.push(x); }
+  else cand.eventos = cand.eventos.map(function (y) { return y.id === x.id ? x : y; });
+  publicar(cand, (eventoNuevo ? 'Nuevo evento: ' : 'Evento editado: ') + x.titulo, 'aviso-evento', function () { $('editor-evento').classList.add('oculto'); pintarEventos(); });
+};
+
+/* ---------- Videos ---------- */
+var videoEdit = null, videoNuevo = false;
+function pintarVideos() {
+  var ul = $('lista-videos'); ul.innerHTML = '';
+  var lista = estado.datos.videos;
+  if (!lista.length) { ul.innerHTML = '<div class="caja ayuda">Todavía no hay videos.</div>'; return; }
+  lista.forEach(function (v, i) {
+    var inf = videoInfo(v.url) || { tipo: '?', img: '' };
+    var it = document.createElement('div'); it.className = 'item';
+    it.innerHTML = (inf.img ? '<img src="' + esc(inf.img) + '" alt="">' : '<div class="sin-foto">' + inf.tipo + '</div>') + '<div class="item__txt"><b>' + esc(v.titulo) + '</b><span>' + inf.tipo + (i < 6 ? ' · sale en el inicio' : '') + '</span></div>';
+    var acc = document.createElement('div'); acc.className = 'item__btn';
+    if (i > 0) acc.appendChild(boton('↑ Subir', 'b-borde b-chico', function () { moverVideo(i, -1); }));
+    acc.appendChild(boton('Ver', 'b-borde b-chico', function () { window.open(v.url, '_blank'); }));
+    acc.appendChild(boton('Editar', 'b-principal b-chico', function () { abrirVideo(v); }));
+    acc.appendChild(boton('Quitar', 'b-peligro b-chico', function () {
+      if (!confirm('¿Quitar el video «' + v.titulo + '» de la página? (El video sigue en su red social.)')) return;
+      var cand = clonar(estado.datos); cand.videos = cand.videos.filter(function (y) { return y.id !== v.id; });
+      publicar(cand, 'Video quitado: ' + v.titulo, 'aviso-panel', pintarVideos);
+    }));
+    it.appendChild(acc); ul.appendChild(it);
+  });
+}
+function moverVideo(i, d) {
+  var cand = clonar(estado.datos), l = cand.videos, x = l.splice(i, 1)[0]; l.splice(i + d, 0, x);
+  publicar(cand, 'Orden de videos', 'aviso-panel', pintarVideos);
+}
+function abrirVideo(v) {
+  videoNuevo = !v; videoEdit = v ? clonar(v) : { id: '', titulo: '', url: '' };
+  $('titulo-editor-video').textContent = v ? 'Editar video' : 'Agregar video';
+  $('v-url').value = videoEdit.url; $('v-titulo').value = videoEdit.titulo;
+  aviso('aviso-video', '', ''); $('editor-video').classList.remove('oculto'); estado.cambiosSinGuardar = false;
+}
+$('btn-nuevo-video').onclick = function () { abrirVideo(null); };
+$('btn-cancelar-video').onclick = function () { estado.cambiosSinGuardar = false; $('editor-video').classList.add('oculto'); };
+$('btn-guardar-video').onclick = function () {
+  var v = videoEdit; v.url = $('v-url').value.trim(); v.titulo = $('v-titulo').value.trim();
+  if (!videoInfo(v.url)) return aviso('aviso-video', 'error', 'La dirección no se reconoce como video de YouTube, TikTok, Facebook o Instagram. Cópiela desde el botón «Compartir». En TikTok debe contener «/video/».');
+  if (!v.titulo) return aviso('aviso-video', 'error', 'Escriba un título para el video.');
+  var cand = clonar(estado.datos);
+  if (videoNuevo) { v.id = idUnico('v-' + v.titulo, cand.videos); cand.videos.unshift(v); }
+  else cand.videos = cand.videos.map(function (y) { return y.id === v.id ? v : y; });
+  publicar(cand, (videoNuevo ? 'Nuevo video: ' : 'Video editado: ') + v.titulo, 'aviso-video', function () { $('editor-video').classList.add('oculto'); pintarVideos(); });
+};
+
+/* ---------- Galería ---------- */
+function pintarGaleria() {
+  var g = $('lista-galeria'); g.innerHTML = '';
+  galeriaEdit.forEach(function (x, i) {
+    var c = document.createElement('div'); c.className = 'gfoto';
+    c.innerHTML = '<img src="' + esc(srcImagen(x.foto)) + '" alt=""><div><input type="text" placeholder="Descripción" value="' + esc(x.texto) + '"><div class="btns"></div></div>';
+    c.querySelector('input').oninput = function () { x.texto = this.value; estado.cambiosSinGuardar = true; };
+    var bs = c.querySelector('.btns');
+    if (i > 0) bs.appendChild(boton('←', 'b-borde b-chico', function () { galeriaEdit.splice(i - 1, 0, galeriaEdit.splice(i, 1)[0]); estado.cambiosSinGuardar = true; pintarGaleria(); }));
+    if (i < galeriaEdit.length - 1) bs.appendChild(boton('→', 'b-borde b-chico', function () { galeriaEdit.splice(i + 1, 0, galeriaEdit.splice(i, 1)[0]); estado.cambiosSinGuardar = true; pintarGaleria(); }));
+    bs.appendChild(boton('Quitar', 'b-peligro b-chico', function () { galeriaEdit.splice(i, 1); estado.cambiosSinGuardar = true; pintarGaleria(); }));
+    g.appendChild(c);
+  });
+}
+$('g-fotos').addEventListener('change', function () {
+  var archivos = [].slice.call(this.files); this.value = ''; if (!archivos.length) return;
+  archivos.reduce(function (p, a, i) {
+    return p.then(function () {
+      cargando(true, 'Preparando foto ' + (i + 1) + ' de ' + archivos.length + '…');
+      return reducirImagen(a, 1400, 0.82).then(function (d) { var r = rutaNueva(); nuevasImagenes[r] = d; galeriaEdit.push({ foto: r, texto: '' }); })
+        .catch(function (e) { aviso('aviso-galeria', 'error', e.message); });
+    });
+  }, Promise.resolve()).then(function () { cargando(false); estado.cambiosSinGuardar = true; pintarGaleria(); });
+});
+$('btn-guardar-galeria').onclick = function () {
+  var cand = clonar(estado.datos); cand.galeria = clonar(galeriaEdit);
+  publicar(cand, 'Galería de fotos actualizada', 'aviso-galeria', function () { galeriaEdit = clonar(estado.datos.galeria); pintarGaleria(); });
+};
+
+/* ---------- Documentos ---------- */
+Object.keys(CONFIG.carpetas).forEach(function (k) { var o = document.createElement('option'); o.value = k; o.textContent = CONFIG.carpetas[k]; $('d-carpeta').appendChild(o); });
+$('d-carpeta').onchange = cargarDocumentos;
+function cargarDocumentos() {
+  var c = $('d-carpeta').value, ul = $('lista-documentos');
+  ul.innerHTML = '<div class="caja ayuda">Cargando documentos…</div>';
+  gh('/contents/documentos/' + c + '?ref=' + CONFIG.rama).then(function (j) {
+    var fs = (j || []).filter(function (x) { return x.type === 'file' && !/^(LEEME|README)/i.test(x.name) && x.name.charAt(0) !== '.'; });
+    ul.innerHTML = '';
+    if (!fs.length) { ul.innerHTML = '<div class="caja ayuda">Esta sección no tiene documentos.</div>'; return; }
+    fs.forEach(function (f) {
+      var it = document.createElement('div'); it.className = 'item';
+      var ext = (f.name.split('.').pop() || '').toUpperCase().slice(0, 4);
+      it.innerHTML = '<div class="sin-foto">' + esc(ext) + '</div><div class="item__txt"><b>' + esc(f.name.replace(/\.[^.]+$/, '')) + '</b><span>' + Math.max(1, Math.round(f.size / 1024)) + ' KB</span></div>';
+      var acc = document.createElement('div'); acc.className = 'item__btn';
+      acc.appendChild(boton('Ver', 'b-borde b-chico', function () { window.open('/documentos/' + c + '/' + encodeURIComponent(f.name), '_blank'); }));
+      acc.appendChild(boton('Eliminar', 'b-peligro b-chico', function () {
+        if (!confirm('¿Eliminar el documento «' + f.name + '» de la página?')) return;
+        cargando(true, 'Eliminando…');
+        confirmarCambios({}, {}, [f.path], 'Documento eliminado: ' + f.name).then(function () {
+          cargando(false); aviso('aviso-documentos', 'ok', '✔ Documento eliminado. La página se actualiza en 1 o 2 minutos.'); cargarDocumentos();
+        }).catch(function (e) { cargando(false); aviso('aviso-documentos', 'error', 'No se pudo eliminar: ' + e.message); });
+      }));
+      it.appendChild(acc); ul.appendChild(it);
+    });
+  }).catch(function (e) { ul.innerHTML = ''; if (e.status === 404) ul.innerHTML = '<div class="caja ayuda">Esta sección no tiene documentos.</div>'; else aviso('aviso-documentos', 'error', e.message); });
+}
+function leerComoDataURL(a) { return new Promise(function (ok, mal) { var r = new FileReader(); r.onload = function () { ok(r.result); }; r.onerror = function () { mal(new Error('No se pudo leer «' + a.name + '».')); }; r.readAsDataURL(a); }); }
+function nombreLimpio(n) { return n.replace(/[\\\/:*?"<>|#%]+/g, ' ').replace(/\s+/g, ' ').trim(); }
+$('d-archivos').addEventListener('change', function () {
+  var archivos = [].slice.call(this.files); this.value = ''; if (!archivos.length) return;
+  var c = $('d-carpeta').value;
+  var grande = archivos.filter(function (a) { return a.size > 25 * 1024 * 1024; });
+  if (grande.length) return aviso('aviso-documentos', 'error', 'El archivo «' + grande[0].name + '» pesa más de 25 MB. Redúzcalo (por ejemplo en ilovepdf.com → Comprimir PDF) y vuelva a intentarlo.');
+  cargando(true, 'Leyendo documentos…');
+  Promise.all(archivos.map(leerComoDataURL)).then(function (datos) {
+    var mapa = {}; archivos.forEach(function (a, i) { mapa['documentos/' + c + '/' + nombreLimpio(a.name)] = datos[i]; });
+    return confirmarCambios({}, mapa, [], 'Documentos subidos a ' + CONFIG.carpetas[c] + ': ' + archivos.map(function (a) { return a.name; }).join(', '));
+  }).then(function () {
+    cargando(false); aviso('aviso-documentos', 'ok', '✔ Documento(s) subido(s). En 1 o 2 minutos aparecen en la página.'); cargarDocumentos();
+  }).catch(function (e) {
+    cargando(false); aviso('aviso-documentos', 'error', 'No se pudo subir: ' + e.message);
+    if (e.recargar) { var b = boton('Recargar', 'b-principal b-chico', function () { location.reload(); }); b.style.marginTop = '8px'; $('aviso-documentos').appendChild(b); }
+  });
+});
+</script>
+</body>
+</html>
