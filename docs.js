@@ -26,3 +26,5 @@
 })();
 // Carga también el contenido editable (noticias, eventos, videos y galería).
 (function(){if(document.querySelector("[data-bloque]")||document.querySelector(".video-tapa")){var s=document.createElement("script");s.src="/contenido.js";s.defer=true;document.head.appendChild(s)}})();
+// Enlace de ingreso del equipo al panel, al final del pie de página (si la página aún no lo tiene).
+(function(){var c=document.querySelector("footer .cred");if(c&&!c.querySelector('a[href="/admin/"]')){c.insertAdjacentHTML("beforeend",' · © 2026 POLIANDES · <a class="ingresar" href="/admin/" rel="nofollow">Ingresar (equipo)</a>')}})();
