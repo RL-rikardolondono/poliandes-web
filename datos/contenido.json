@@ -1,0 +1,126 @@
+{
+ "noticias": [
+  {
+   "id": "diplomado-neurodivergencia",
+   "fecha": "2026-10-12",
+   "titulo": "Inicia el Diplomado en Neurodivergencia",
+   "texto": "El lunes 12 de octubre comienza el Diplomado en Neurodivergencia: Autismo en el Entorno Escolar, con enfoque clínico y basado en evidencia. Clases en vivo los lunes a las 7:00 p. m.",
+   "foto": "/diplomado-neurodivergencia.svg",
+   "enlace": "/diplomado-autismo.html",
+   "textoEnlace": "Ver el diplomado",
+   "video": ""
+  },
+  {
+   "id": "renovacion-2026",
+   "fecha": "2026-07-09",
+   "titulo": "Renovación de matrícula y de beca institucional",
+   "texto": "Todos los estudiantes desde segundo semestre deben renovar su matrícula semestral entregando impreso el formato de renovación el día y la hora asignados.",
+   "foto": "",
+   "enlace": "/estudiantes.html#renovacion",
+   "textoEnlace": "Ver el formato",
+   "video": ""
+  },
+  {
+   "id": "diplomado-docencia",
+   "fecha": "2026-05-12",
+   "titulo": "Diplomado en Docencia Universitaria",
+   "texto": "Estrategias de enseñanza-aprendizaje para docentes de educación superior y de formación para el trabajo. 100 % virtual.",
+   "foto": "/img/docencia.jpg",
+   "enlace": "/diplomado-docencia.html",
+   "textoEnlace": "Ver el diplomado",
+   "video": ""
+  },
+  {
+   "id": "admisiones-2026-1",
+   "fecha": "2026-02-04",
+   "titulo": "Carpeta de matrícula",
+   "texto": "Conozca los documentos que debe entregar en físico, en carpeta blanca, para formalizar su matrícula.",
+   "foto": "",
+   "enlace": "/carpeta-matricula.html",
+   "textoEnlace": "Ver la carpeta",
+   "video": "https://www.youtube.com/shorts/H9KVQVdzciw"
+  },
+  {
+   "id": "practicas-2026",
+   "fecha": "2026-01-29",
+   "titulo": "Carpeta de prácticas académicas",
+   "texto": "Requisitos y formato para iniciar sus prácticas académicas en empresas con convenio vigente.",
+   "foto": "",
+   "enlace": "/estudiantes.html#practicas",
+   "textoEnlace": "Ver requisitos",
+   "video": ""
+  },
+  {
+   "id": "comunicado-001-2025",
+   "fecha": "2025-12-28",
+   "titulo": "Comunicado No. 001 – Supletorios",
+   "texto": "Comunicado institucional sobre supletorios y Resolución rectoral No. 004 de 2025.",
+   "foto": "",
+   "enlace": "/institucional.html#comunicados",
+   "textoEnlace": "Ver el comunicado",
+   "video": ""
+  }
+ ],
+ "eventos": [
+  {
+   "id": "ev-neuro",
+   "fecha": "2026-10-12",
+   "titulo": "Inicio del Diplomado en Neurodivergencia",
+   "detalle": "Clases en vivo por Zoom, lunes 7:00 p. m.",
+   "enlace": "/diplomado-autismo.html"
+  },
+  {
+   "id": "ev-becas",
+   "fecha": "2026-10-30",
+   "titulo": "Becas 500 – convocatoria",
+   "detalle": "Inscripciones únicamente por el WhatsApp institucional 301 344 4422.",
+   "enlace": "/aspirantes.html#becas"
+  }
+ ],
+ "videos": [
+  {
+   "id": "v-admisiones",
+   "titulo": "POLIANDES Admisiones 2026-1",
+   "url": "https://www.youtube.com/shorts/H9KVQVdzciw"
+  },
+  {
+   "id": "v-induccion",
+   "titulo": "Inducción a estudiantes nuevos",
+   "url": "https://www.youtube.com/watch?v=Hw64RrxRvfI"
+  }
+ ],
+ "galeria": [
+  {
+   "foto": "/img/veterinaria-grupo.jpg",
+   "texto": "Estudiantes de Veterinaria"
+  },
+  {
+   "foto": "/img/practica-1.jpg",
+   "texto": "Práctica de atención a la primera infancia"
+  },
+  {
+   "foto": "/img/estudiantes-1.jpg",
+   "texto": "Estudiantes de POLIANDES"
+  },
+  {
+   "foto": "/img/practica-2.jpg",
+   "texto": "Práctica en el aula"
+  },
+  {
+   "foto": "/img/aula-1.jpg",
+   "texto": "Clase en POLIANDES"
+  },
+  {
+   "foto": "/img/reel-servicio-2.jpg",
+   "texto": "Jornada social de los estudiantes"
+  },
+  {
+   "foto": "/img/reel-maquinaria.jpg",
+   "texto": "Estudiante de Maquinaria Pesada"
+  },
+  {
+   "foto": "/img/preescolar-jovenes-creadores-1.png",
+   "texto": "Taller Jóvenes Creadores"
+  }
+ ]
+}
