@@ -34,7 +34,7 @@ main{max-width:1100px;margin:0 auto;padding:24px 16px 60px}
 .b-grande{padding:14px 24px;font-size:1.05rem}
 label{display:block;font-weight:600;margin:14px 0 6px}
 .ayuda{font-weight:400;color:var(--suave);font-size:.88rem;margin-top:4px}
-input[type=text],input[type=url],input[type=date],input[type=password],select,textarea{width:100%;padding:11px 12px;border:1.5px solid var(--borde);border-radius:10px;font:inherit;background:#fff;color:var(--texto)}
+input[type=text],input[type=url],input[type=email],input[type=date],input[type=password],select,textarea{width:100%;padding:11px 12px;border:1.5px solid var(--borde);border-radius:10px;font:inherit;background:#fff;color:var(--texto)}
 input:focus,select:focus,textarea:focus{outline:none;border-color:var(--verde);box-shadow:0 0 0 3px var(--verde-claro)}
 textarea{min-height:200px;resize:vertical;line-height:1.6}
 .fila{display:grid;grid-template-columns:1fr 1fr;gap:14px}
@@ -89,23 +89,27 @@ textarea{min-height:200px;resize:vertical;line-height:1.6}
   <section id="vista-ingreso" class="ingreso">
     <div class="caja">
       <h1>Entrar al panel</h1>
-      <p>Pegue aquí la <b>llave de acceso</b> de GitHub de esta página. La llave solo sirve para la página de POLIANDES y queda guardada únicamente en este equipo.</p>
-      <label for="llave">Llave de acceso</label>
-      <input type="password" id="llave" autocomplete="off" placeholder="github_pat_…">
+      <p>Escriba su correo y su contraseña del panel.</p>
+      <label for="i-correo">Correo</label>
+      <input type="email" id="i-correo" autocomplete="username">
+      <label for="i-clave">Contraseña</label>
+      <input type="password" id="i-clave" autocomplete="current-password">
       <label class="chk"><input type="checkbox" id="recordar" checked> Recordar en este equipo (no lo marque en computadores ajenos)</label>
       <div id="aviso-ingreso"></div>
       <div class="pie-acciones"><button class="boton b-principal b-grande" id="btn-entrar" type="button">Entrar</button></div>
+      <p class="ayuda">¿Olvidó la contraseña? Pídale a otra persona con acceso que se la cambie en la pestaña «Usuarios», o escriba a SkyNet Genesis: contacto@skynetgenesis.com · WhatsApp 3044375758.</p>
     </div>
     <details class="caja">
-      <summary><b>¿No tiene la llave? Cómo crearla (una sola vez)</b></summary>
-      <ol class="pasos">
-        <li>Inicie sesión en GitHub y abra <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener">esta página para crear la llave</a>.</li>
-        <li>En <b>Token name</b> escriba: <i>Panel POLIANDES</i>. En <b>Expiration</b> elija <b>No expiration</b> (o la fecha que prefiera).</li>
-        <li>En <b>Repository access</b> elija <b>Only select repositories</b> y marque solo el repositorio <b id="nombre-repo">poliandes-web</b>.</li>
-        <li>En <b>Permissions → Repository permissions</b>, busque <b>Contents</b> y cámbielo a <b>Read and write</b>. No active nada más.</li>
-        <li>Pulse <b>Generate token</b>, copie la llave (empieza por <code>github_pat_</code>) y péguela arriba.</li>
+      <summary><b>Configuración inicial (solo la primera vez)</b></summary>
+      <p class="ayuda">Si todavía nadie tiene usuario, entre una sola vez con la llave de GitHub de esta web y cree los usuarios en la pestaña «Usuarios».</p>
+      <label for="llave">Llave de GitHub</label>
+      <input type="password" id="llave" autocomplete="off" placeholder="github_pat_…">
+      <div class="pie-acciones"><button class="boton b-borde" id="btn-entrar-llave" type="button">Entrar con la llave</button></div>
+      <ol class="pasos ayuda">
+        <li>Cree la llave en <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener">GitHub</a> con el nombre <i>Panel POLIANDES</i>, sin vencimiento.</li>
+        <li>En <b>Repository access</b> elija <b>Only select repositories</b> y marque solo <b>poliandes-web</b>.</li>
+        <li>En <b>Contents</b> elija <b>Read and write</b> y pulse <b>Generate token</b>.</li>
       </ol>
-      <p class="ayuda">Puede darle la misma llave a la persona de POLIANDES que actualizará la página. Guárdela en un lugar seguro; si la pierde o cree que alguien la vio, bórrela en GitHub y cree otra igual.</p>
     </details>
   </section>
 
@@ -117,6 +121,7 @@ textarea{min-height:200px;resize:vertical;line-height:1.6}
       <button class="pestana" role="tab" aria-selected="false" data-pestana="videos">Videos</button>
       <button class="pestana" role="tab" aria-selected="false" data-pestana="galeria">Fotos</button>
       <button class="pestana" role="tab" aria-selected="false" data-pestana="documentos">Documentos</button>
+      <button class="pestana" role="tab" aria-selected="false" data-pestana="usuarios">Usuarios</button>
     </div>
     <div id="aviso-panel"></div>
 
@@ -224,12 +229,36 @@ textarea{min-height:200px;resize:vertical;line-height:1.6}
       </div>
       <div class="lista" id="lista-documentos"></div>
     </div>
+
+    <!-- Usuarios -->
+    <div data-panel="usuarios" class="oculto">
+      <div class="caja">
+        <h2>Personas que pueden entrar al panel</h2>
+        <p class="ayuda">Cada persona entra con su correo y su contraseña desde cualquier computador o celular. Para cambiar una contraseña, vuelva a crear el usuario con el mismo correo.</p>
+        <div class="lista" id="lista-usuarios"></div>
+      </div>
+      <div class="caja">
+        <h2>Agregar persona o cambiar contraseña</h2>
+        <div class="fila">
+          <div><label for="u-nombre">Nombre</label><input type="text" id="u-nombre" maxlength="60" placeholder="Ej.: Ricardo"></div>
+          <div><label for="u-correo">Correo</label><input type="email" id="u-correo" autocomplete="off"></div>
+        </div>
+        <div class="fila">
+          <div><label for="u-clave">Contraseña <span class="ayuda">(mínimo 12 caracteres)</span></label><input type="password" id="u-clave" autocomplete="new-password"></div>
+          <div><label for="u-clave2">Repetir contraseña</label><input type="password" id="u-clave2" autocomplete="new-password"></div>
+        </div>
+        <p class="ayuda">Use una contraseña que no use en otros sitios. Una frase larga es fácil de recordar y difícil de adivinar.</p>
+        <div id="aviso-usuarios"></div>
+        <div class="pie-acciones"><button class="boton b-accion b-grande" type="button" id="btn-guardar-usuario">Guardar usuario</button></div>
+      </div>
+    </div>
   </section>
 </main>
 <p class="firma">Panel desarrollado por SkyNet Genesis · contacto@skynetgenesis.com · WhatsApp 3044375758</p>
 
 <div class="cargando oculto" id="cargando"><div class="rueda"></div><div id="cargando-texto">Cargando…</div></div>
 
+<script src="/admin/acceso.js"></script>
 <script>
 /* ===== Configuración de esta web (cambiar solo esto al copiar el panel a otra web) ===== */
 var CONFIG = {
@@ -249,7 +278,7 @@ var CONFIG = {
 /* ======================================================================================= */
 
 var API = 'https://api.github.com/repos/' + CONFIG.dueno + '/' + CONFIG.repo;
-var estado = { llave: '', datos: null, commitBase: '', cambiosSinGuardar: false };
+var estado = { llave: '', usuario: '', accesos: { usuarios: [] }, datos: null, commitBase: '', cambiosSinGuardar: false };
 var nuevasImagenes = {};  // ruta -> dataURL pendiente de subir
 var galeriaEdit = null;   // copia de la galería mientras se edita
 
@@ -363,23 +392,36 @@ function entrar(llave, recordar) {
   cargando(true, 'Entrando…');
   gh('').then(function (repo) {
     if (repo.permissions && !repo.permissions.push) throw errorGH(403);
-    return Promise.all([refActual(), leerArchivo(CONFIG.datos)]);
+    return Promise.all([refActual(), leerArchivo(CONFIG.datos), leerArchivo('admin/accesos.json').catch(function () { return '{"usuarios":[]}'; })]);
   }).then(function (r) {
     estado.commitBase = r[0];
     estado.datos = JSON.parse(r[1]);
     ['noticias', 'eventos', 'videos', 'galeria'].forEach(function (k) { if (!estado.datos[k]) estado.datos[k] = []; });
+    try { estado.accesos = JSON.parse(r[2]); } catch (x) { estado.accesos = { usuarios: [] }; } estado.accesos.usuarios = estado.accesos.usuarios || [];
     guardarLS(CONFIG.claveLocal, estado.llave, recordar);
     $('vista-ingreso').classList.add('oculto'); $('vista-panel').classList.remove('oculto'); $('acciones-barra').classList.remove('oculto');
-    cargando(false); pintarTodo();
+    cargando(false); pintarTodo(); pintarUsuarios();
+    if (!estado.accesos.usuarios.length) { verPanel('usuarios'); aviso('aviso-panel', 'info', 'Primer paso: cree aquí su usuario y contraseña. Así podrá entrar desde cualquier computador o celular sin la llave de GitHub.'); }
   }).catch(function (e) {
     cargando(false); estado.llave = '';
     if (e.status === 401) borrarLS(CONFIG.claveLocal);
     $('vista-ingreso').classList.remove('oculto');
-    aviso('aviso-ingreso', 'error', e.message);
+    aviso('aviso-ingreso', 'error', e.status === 401 ? 'El acceso de esta web cambió. Pida a SkyNet Genesis que lo renueve (contacto@skynetgenesis.com · WhatsApp 3044375758).' : e.message);
   });
 }
-$('btn-entrar').onclick = function () { entrar($('llave').value, $('recordar').checked); };
-$('llave').addEventListener('keydown', function (e) { if (e.key === 'Enter') $('btn-entrar').click(); });
+// Ingreso normal: correo y contraseña
+$('btn-entrar').onclick = function () {
+  var correo = $('i-correo').value, clave = $('i-clave').value;
+  if (!correo || !clave) { aviso('aviso-ingreso', 'error', 'Escriba su correo y su contraseña.'); return; }
+  cargando(true, 'Verificando…');
+  Acceso.leer().then(function (acc) { return Acceso.abrir(acc, correo, clave); })
+    .then(function (r) { cargando(false); estado.usuario = r.nombre; entrar(r.llave, $('recordar').checked); })
+    .catch(function (e) { cargando(false); aviso('aviso-ingreso', 'error', e.message); });
+};
+['i-correo', 'i-clave'].forEach(function (id) { $(id).addEventListener('keydown', function (e) { if (e.key === 'Enter') $('btn-entrar').click(); }); });
+// Configuración inicial con la llave de GitHub
+$('btn-entrar-llave').onclick = function () { entrar($('llave').value, $('recordar').checked); };
+$('llave').addEventListener('keydown', function (e) { if (e.key === 'Enter') $('btn-entrar-llave').click(); });
 $('btn-salir').onclick = function () {
   if (estado.cambiosSinGuardar && !confirm('Tiene cambios sin publicar. ¿Salir de todos modos?')) return;
   borrarLS(CONFIG.claveLocal); estado.cambiosSinGuardar = false; location.reload();
@@ -405,7 +447,7 @@ function pintarTodo() {
   ['noticia', 'evento', 'video'].forEach(function (k) { $('editor-' + k).classList.add('oculto'); });
   pintarNoticias(); pintarEventos(); pintarVideos(); galeriaEdit = clonar(estado.datos.galeria); pintarGaleria();
 }
-document.querySelectorAll('input,textarea').forEach(function (el) { if (el.id !== 'llave') el.addEventListener('input', function () { estado.cambiosSinGuardar = true; }); });
+document.querySelectorAll('input,textarea').forEach(function (el) { if (['llave', 'i-correo', 'i-clave', 'u-nombre', 'u-correo', 'u-clave', 'u-clave2'].indexOf(el.id) < 0) el.addEventListener('input', function () { estado.cambiosSinGuardar = true; }); });
 
 /* ---------- Imágenes ---------- */
 function reducirImagen(archivo, max, calidad) {
@@ -639,6 +681,50 @@ $('d-archivos').addEventListener('change', function () {
     if (e.recargar) { var b = boton('Recargar', 'b-principal b-chico', function () { location.reload(); }); b.style.marginTop = '8px'; $('aviso-documentos').appendChild(b); }
   });
 });
+
+/* ---------- Usuarios (ingreso con contraseña) ---------- */
+function pintarUsuarios() {
+  var c = $('lista-usuarios'); c.innerHTML = '';
+  if (!estado.accesos.usuarios.length) { c.innerHTML = '<div class="aviso info">Todavía no hay usuarios. Cree el primero abajo.</div>'; return; }
+  estado.accesos.usuarios.forEach(function (u) {
+    var d = document.createElement('div'); d.className = 'item';
+    var t = document.createElement('div'); t.className = 'item__txt';
+    var b = document.createElement('b'); b.textContent = u.nombre || 'Usuario'; var sp = document.createElement('span'); sp.textContent = 'Creado el ' + (u.creado || '');
+    t.appendChild(b); t.appendChild(sp);
+    var acc = document.createElement('div'); acc.className = 'item__btn';
+    acc.appendChild(boton('Quitar acceso', 'b-peligro b-chico', function () { quitarUsuario(u); }));
+    d.appendChild(t); d.appendChild(acc); c.appendChild(d);
+  });
+}
+function guardarAccesos(acc, mensaje, avisoId, alTerminar) {
+  cargando(true, 'Guardando…');
+  return confirmarCambios({ 'admin/accesos.json': JSON.stringify(acc, null, 1) }, {}, [], mensaje).then(function () {
+    estado.accesos = acc; cargando(false); pintarUsuarios(); if (alTerminar) alTerminar(); return true;
+  }).catch(function (e) { cargando(false); aviso(avisoId, 'error', 'No se pudo guardar: ' + e.message); return false; });
+}
+$('btn-guardar-usuario').onclick = function () {
+  var nombre = $('u-nombre').value.trim(), correo = $('u-correo').value.trim(), c1 = $('u-clave').value, c2 = $('u-clave2').value;
+  if (!nombre) { aviso('aviso-usuarios', 'error', 'Escriba el nombre.'); return; }
+  if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(correo)) { aviso('aviso-usuarios', 'error', 'Revise el correo.'); return; }
+  var err = Acceso.claveValida(c1); if (err) { aviso('aviso-usuarios', 'error', err.replace('Fundacion Santa Marta 2026', 'Poliandes Santa Marta 2026')); return; }
+  if (c1 !== c2) { aviso('aviso-usuarios', 'error', 'Las dos contraseñas no coinciden.'); return; }
+  cargando(true, 'Protegiendo la contraseña…');
+  Acceso.cifrar(estado.llave, nombre, correo, c1).then(function (reg) {
+    var acc = clonar(estado.accesos);
+    var existe = acc.usuarios.some(function (u) { return u.id === reg.id; });
+    acc.usuarios = acc.usuarios.filter(function (u) { return u.id !== reg.id; }).concat([reg]);
+    return guardarAccesos(acc, (existe ? 'Contraseña cambiada: ' : 'Nuevo usuario del panel: ') + nombre, 'aviso-usuarios', function () {
+      ['u-nombre', 'u-correo', 'u-clave', 'u-clave2'].forEach(function (id) { $(id).value = ''; });
+      aviso('aviso-usuarios', 'ok', '✔ Listo. ' + nombre + ' ya puede entrar con su correo y contraseña (en 1 o 2 minutos, desde cualquier equipo).');
+    });
+  }).catch(function (e) { cargando(false); aviso('aviso-usuarios', 'error', e.message); });
+};
+function quitarUsuario(u) {
+  if (estado.accesos.usuarios.length === 1 && !confirm('Es el único usuario. Si lo quita, solo se podrá entrar con la llave de GitHub. ¿Continuar?')) return;
+  if (!confirm('¿Quitar el acceso de ' + (u.nombre || 'este usuario') + '?')) return;
+  var acc = clonar(estado.accesos); acc.usuarios = acc.usuarios.filter(function (x) { return x.id !== u.id; });
+  guardarAccesos(acc, 'Acceso quitado: ' + (u.nombre || ''), 'aviso-usuarios', function () { aviso('aviso-usuarios', 'ok', '✔ Acceso quitado.'); });
+}
 </script>
 </body>
 </html>
