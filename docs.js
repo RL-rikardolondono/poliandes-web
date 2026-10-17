@@ -27,4 +27,4 @@
 // Carga también el contenido editable (noticias, eventos, videos y galería).
 (function(){if(document.querySelector("[data-bloque]")||document.querySelector(".video-tapa")){var s=document.createElement("script");s.src="/contenido.js";s.defer=true;document.head.appendChild(s)}})();
 // Enlace de ingreso del equipo al panel, al final del pie de página (si la página aún no lo tiene).
-(function(){var c=document.querySelector("footer .cred");if(c&&!c.querySelector('a[href="/admin/"]')){c.insertAdjacentHTML("beforeend",' · © 2026 POLIANDES · <a class="ingresar" href="/admin/" rel="nofollow">Ingresar (equipo)</a>')}})();
+(function(){var c=document.querySelector("footer .cred");if(!c)return;if(!c.querySelector('a[href="/admin/"]')){c.insertAdjacentHTML("beforeend",' · © 2026 POLIANDES · <a class="ingresar" href="/admin/" rel="nofollow">Ingresar (equipo)</a>')}if(!c.querySelector('a[href*="agenda-ia"]')){c.insertAdjacentHTML("beforeend",' · <a class="ingresar" href="https://agenda-ia.skynetgenesis.com/" target="_blank" rel="nofollow noopener">Agenda-IA (funcionarios)</a>')}})();
