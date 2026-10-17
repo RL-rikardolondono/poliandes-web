@@ -1,0 +1,13 @@
+{
+ "usuarios": [
+  {
+   "id": "aa54f26b7d6ef35d8eaa3d6217e972e5ed16939b199a66e0799bbfc8556355a4",
+   "nombre": "RL",
+   "sal": "mNNcnffX8hjTi9SzV4nISw==",
+   "iv": "Th9GlX6DNxGAjJ5/",
+   "iter": 600000,
+   "datos": "bLJsk2bczBaiSymWIysO4mH1A1sp3PdSHhg5DiDXssZZLvzcJjJWAZt70/CeGa53W4z9PiNrRg0VjRIZbwLjai1AhMYa7qe9UeQLaWG6O1bnff++5Z9RjijgcIrp4g4qwgyZ6Gdw3WufTUz2fQ==",
+   "creado": "2026-10-17"
+  }
+ ]
+}
