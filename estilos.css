@@ -101,3 +101,10 @@ footer ul{list-style:none;margin:0;padding:0}footer li{margin:4px 0}
 .video-red{position:absolute;left:12px;top:10px;color:#fff;font-weight:700;letter-spacing:.5px}
 .video iframe{width:100%;aspect-ratio:16/9;border:0;display:block}
 .video figcaption{padding:10px 12px;font-weight:500;color:var(--azul)}
+
+/* Ingresar (AcademIA) */
+nav.menu .dd>button.cta{background:var(--naranja);color:var(--azul-osc);font-weight:700;margin-left:6px}
+nav.menu .dd>button.cta:hover{background:var(--naranja);filter:brightness(1.08)}
+.dd.der .sub{left:auto;right:0;min-width:280px}
+.dd.der .sub a small{display:block;font-size:.78rem;color:var(--suave);font-weight:400}
+@media(max-width:1180px){nav.menu .dd.der{order:-1;margin-bottom:6px}nav.menu .dd>button.cta{margin:0;width:100%;text-align:left}.dd.der .sub a small{color:rgba(255,255,255,.75)}}
