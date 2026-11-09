@@ -35,11 +35,11 @@ form .full{grid-column:1/-1}label{display:flex;flex-direction:column;gap:5px;fon
 <div class="card"><h3>Hecho para su empresa</h3><p>Ajustamos el curso a sus riesgos, sus cargos y sus horarios: presencial en Santa Marta, en su empresa o virtual.</p></div>
 <div class="card"><h3>Listo para la auditoría</h3><p>Entregamos listas de asistencia, evaluaciones y constancias que respaldan el estándar de capacitación de la Resolución 0312 de 2019.</p></div>
 <div class="card"><h3>Usuarios de Centinela-IA SST</h3><p>Si su empresa usa Centinela-IA SST, cargue las constancias en su programa de capacitación y tenga todo en un solo lugar.</p></div></div></section>
-<section><h2>Cursos disponibles</h2><div class="grid" id="cursos"></div>
+<section><h2>Cursos disponibles</h2><p style="margin:.2rem 0 1rem"><b>Grupos de 10 trabajadores o más: 15 % de descuento.</b> Los valores incluyen material, evaluación y constancia de cada trabajador que aprueba.</p><div class="grid" id="cursos"></div>
 <p style="color:var(--suave);font-size:14px">Los cursos de trabajo en alturas y de espacios confinados solo los pueden certificar los centros autorizados por la norma; para esos le orientamos a dónde acudir. Nuestros cursos cortos son de educación informal y otorgan constancia de asistencia (Decreto 1075 de 2015).</p></section>
 <section><h2>Así funciona</h2><div class="grid">
 <div class="card paso"><b class="n">1</b><div><h3>Nos cuenta qué necesita</h3><p>Escoja los cursos y el número de trabajadores en el formulario de abajo.</p></div></div>
-<div class="card paso"><b class="n">2</b><div><h3>Le enviamos la propuesta</h3><p>En menos de 2 días hábiles recibe fechas, modalidad y valor.</p></div></div>
+<div class="card paso"><b class="n">2</b><div><h3>Le enviamos la propuesta</h3><p>En menos de 2 días hábiles recibe fechas, modalidad y el valor total con el descuento que aplique.</p></div></div>
 <div class="card paso"><b class="n">3</b><div><h3>Dictamos el curso</h3><p>Sus trabajadores toman el curso y reciben su constancia al aprobar.</p></div></div></div></section>
 <section id="pedido"><h2>Pida su curso</h2>
 <form id="f" novalidate>
@@ -58,9 +58,9 @@ form .full{grid-column:1/-1}label{display:flex;flex-direction:column;gap:5px;fon
 </main>
 <footer><div>POLIANDES · Calle 11D No. 22-90, Santa Marta (Magdalena) · WhatsApp 301 344 4422 · <a href="mailto:poliandes@poliandes.com">poliandes@poliandes.com</a> · <a href="https://www.poliandes.com/">www.poliandes.com</a></div></footer>
 <script>
-const CURSOS=[['Inducción y reinducción en SST para trabajadores','8 horas'],['Primeros auxilios básicos','16 horas'],['Brigadas de emergencia, evacuación y control de incendios','20 horas'],['Seguridad vial y manejo defensivo','16 horas'],['Prevención del riesgo psicosocial, convivencia y acoso laboral','8 horas'],['Higiene postural, manejo de cargas y pausas activas','8 horas'],['Manejo seguro de sustancias químicas (SGA)','8 horas'],['Funciones del COPASST y del vigía de SST','8 horas'],['Investigación de incidentes y accidentes de trabajo','12 horas'],['Curso a la medida de su empresa','Según el tema']];
+const CURSOS=[['Inducción y reinducción en SST para trabajadores','8 horas','$60.000'],['Primeros auxilios básicos','16 horas','$120.000'],['Brigadas de emergencia, evacuación y control de incendios','20 horas','$150.000'],['Seguridad vial y manejo defensivo','16 horas','$110.000'],['Prevención del riesgo psicosocial, convivencia y acoso laboral','8 horas','$60.000'],['Higiene postural, manejo de cargas y pausas activas','8 horas','$60.000'],['Manejo seguro de sustancias químicas (SGA)','8 horas','$70.000'],['Funciones del COPASST y del vigía de SST','8 horas','$60.000'],['Investigación de incidentes y accidentes de trabajo','12 horas','$90.000'],['Curso a la medida de su empresa','Según el tema','']];
 const q=new URLSearchParams(location.search);const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
-document.getElementById('cursos').innerHTML=CURSOS.map(([n,h])=>`<div class="card"><h3>${esc(n)}</h3><p>Intensidad sugerida: ${esc(h)} · constancia POLIANDES</p></div>`).join('');
+document.getElementById('cursos').innerHTML=CURSOS.map(([n,h,v])=>`<div class="card"><h3>${esc(n)}</h3><p>Intensidad: ${esc(h)} · constancia POLIANDES</p><p style="font-size:1.15rem;font-weight:700;margin:.4rem 0 0">${v ? esc(v) + ' <span style="font-weight:400;font-size:.9rem">por trabajador</span>' : 'Valor según la propuesta'}</p></div>`).join('');
 document.getElementById('chk').innerHTML=CURSOS.map(([n],i)=>`<label><input type="checkbox" name="c" value="${esc(n)}"> ${esc(n)}</label>`).join('');
 const f=document.getElementById('f');if(q.get('empresa'))f.empresa.value=q.get('empresa');if(q.get('origen')==='centinela')f.centinela.value='Sí';
 function texto(){const fd=new FormData(f);const cs=fd.getAll('c');const m=document.getElementById('msg');
