@@ -71,5 +71,5 @@ if(!cs.length){m.textContent='Escoja al menos un curso.';return null}m.textConte
 return ['PEDIDO DE CURSOS PARA EMPRESA (página de empresas)','Empresa: '+fd.get('empresa')+(fd.get('nit')?' · NIT '+fd.get('nit'):''),'Solicita: '+fd.get('nombre')+(fd.get('cargo')?' ('+fd.get('cargo')+')':''),'Celular: '+fd.get('cel')+(fd.get('correo')?' · '+fd.get('correo'):''),'Ciudad: '+fd.get('ciudad'),'Usa Centinela-IA SST: '+fd.get('centinela'),'Cursos: '+cs.join('; '),'Trabajadores: '+fd.get('n')+' · Modalidad: '+fd.get('mod'),fd.get('obs')?'Comentarios: '+fd.get('obs'):''].filter(Boolean).join('\n')}
 f.addEventListener('submit',e=>{e.preventDefault();const t=texto();if(t)window.open('https://wa.me/573013444422?text='+encodeURIComponent(t),'_blank','noopener')});
 document.getElementById('mail').addEventListener('click',()=>{const t=texto();if(t)location.href='mailto:poliandes@poliandes.com?subject='+encodeURIComponent('Pedido de cursos para empresa')+'&body='+encodeURIComponent(t)});
-</script><script src="https://skynetgenesis.com/dayana/widget.js?v=2" defer></script>
+</script><script src="https://skynetgenesis.com/dayana/widget.js?v=3" defer></script>
 </body></html>
