@@ -31,3 +31,6 @@
 
 // Enlace a la Biblioteca Real (Fundación Reina Elizabeth) en el menú y en el pie.
 (function(){var B="https://biblioteca.fundacionreinaelizabeth.com/";var m=document.getElementById("menu");if(m&&!m.querySelector('a[href*="biblioteca.fundacionreinaelizabeth"]')){var a=document.createElement("a");a.href=B;a.target="_blank";a.rel="noopener";a.textContent="Biblioteca";m.insertBefore(a,m.querySelector(".dd.der"))}var c=document.querySelector("footer .cred");if(c&&!c.querySelector('a[href*="biblioteca.fundacionreinaelizabeth"]')){c.insertAdjacentHTML("beforeend",' · <a class="ingresar" href="'+B+'" target="_blank" rel="noopener">Biblioteca Real</a>')}})();
+
+// Enlace a la Biblioteca Digital de la Real Academia Española (RAE) en el pie.
+(function(){var R="https://rae.es/biblioteca-digital";var c=document.querySelector("footer .cred");if(c&&!c.querySelector('a[href*="rae.es/biblioteca-digital"]')){c.insertAdjacentHTML("beforeend",' · <a class="ingresar" href="'+R+'" target="_blank" rel="noopener">Biblioteca Digital RAE</a>')}})();
